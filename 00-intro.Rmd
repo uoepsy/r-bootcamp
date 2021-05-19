@@ -152,6 +152,8 @@ knitr::include_graphics(here('images', 'rstudio-panes.png'))
 
 # Installing RStudio
 
+0. If you have a previous version of RStudio already installed, uninstall it (if on Windows), or move it to the bin (if on a macOS).
+
 1. At [this link](https://www.rstudio.com/products/rstudio/download/), scroll down until you see RStudio Desktop and "Download RStudio".
 
 2. Open RStudio, type the following in the console, and press Enter after each line
