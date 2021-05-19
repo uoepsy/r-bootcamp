@@ -1,0 +1,23 @@
+---
+title: "Getting started"
+description: |
+  Introducing R, RStudio, and computer paths.
+author:
+  - name: Umberto Noe
+    url: https://www.ed.ac.uk/profile/umberto-noe
+    affiliation: Department of Psychology, The University of Edinburgh
+  - name: Josiah King
+    url: https://www.ed.ac.uk/profile/josiah-pj-king
+    affiliation: Department of Psychology, The University of Edinburgh
+date: "`r Sys.Date()`"
+output: distill::distill_article
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+library(here)
+i_am('01-intro.Rmd')
+
+library(tidyverse)
+```

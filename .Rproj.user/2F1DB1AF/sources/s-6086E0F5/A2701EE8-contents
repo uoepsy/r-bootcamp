@@ -1,0 +1,49 @@
+---
+title: "Installation"
+description: |
+  All the components you need to install.
+author:
+  - name: Umberto Noe
+    url: https://www.ed.ac.uk/profile/umberto-noe
+    affiliation: Department of Psychology, The University of Edinburgh
+  - name: Josiah King
+    url: https://www.ed.ac.uk/profile/josiah-pj-king
+    affiliation: Department of Psychology, The University of Edinburgh
+date: "`r Sys.Date()`"
+output: distill::distill_article
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+library(here)
+i_am('02-installation.Rmd')
+
+library(tidyverse)
+```
+
+
+# What is R?
+
+R is a programming language: an actual language that a computer can understand. The purpose of a programming language is to instruct the computer to do some boring and long computations on our behalf. 
+
+When you learn to program you are in fact learning a new language, just like English, Italian, and so on. The only difference is that, since we will be communicating with a machine, the language itself needs to be unambiguous, concise, and hence very limited in its grammar and scope. Basically, a programming language follows a very strict set of rules. The computer will do **exactly** what you type. It will not try to understand what you want it to do and, if you make an error in your language, the computer will not fix it, but it will just do what you say. 
+
+If you commit an error, there are two possible outcomes:
+
+1. The computation goes ahead without any sign of errors nor messages. This is the most worrying type of error as it's hard to catch. You will get a result for your computation, but it may make no sense.
+2. The computer will tell you that what you're asking to do doesn't make sense. Easier to fix!
+
+
+:::frame
+**Concept 1**
+
+The programing language that you will learn is called R.
+:::
+
+
+
+# What is RStudio?
+
+
+

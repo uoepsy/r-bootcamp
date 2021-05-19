@@ -1,0 +1,11 @@
+"0","knitr::opts_chunk$set(echo = FALSE)"
+"0",""
+"0","library(here)"
+"2","here() starts at /Users/unoe/R/uoepsy/r-bootcamp
+"
+"0","i_am('intro.Rmd')"
+"2","Error: Could not find associated project in working directory or any parent directory.
+- Path in project: intro.Rmd
+- Current working directory: /Users/unoe/R/uoepsy/r-bootcamp
+Please open the project associated with this file and try again.
+"
