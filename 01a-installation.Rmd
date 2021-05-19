@@ -17,13 +17,11 @@ output: distill::distill_article
 knitr::opts_chunk$set(echo = FALSE)
 
 library(here)
-i_am('02-installation.Rmd')
-
 library(tidyverse)
 ```
 
 
-# What is R?
+# R as a calculator
 
 R is a programming language: an actual language that a computer can understand. The purpose of a programming language is to instruct the computer to do some boring and long computations on our behalf. 
 
@@ -35,11 +33,11 @@ If you commit an error, there are two possible outcomes:
 2. The computer will tell you that what you're asking to do doesn't make sense. Easier to fix!
 
 
-:::frame
-**Concept 1**
 
-The programing language that you will learn is called R.
-:::
+### Concepts
+
+The programming language that you will learn is called R.
+
 
 
 
