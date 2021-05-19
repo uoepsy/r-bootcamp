@@ -51,6 +51,20 @@ ggplot(penguins, aes(flipper_length_mm, bill_length_mm,
 
 <br>
 
+```{r echo=FALSE}
+library(gt)
+
+penguins %>%
+  group_by(species) %>%
+  summarise(`Count` = n(),
+            `Mean Bill Length` = mean(bill_length_mm, na.rm = T),
+            `Std. Dev. Bill Length` = sd(bill_length_mm, na.rm = T)) %>%
+  rename(Species = species) %>%
+  gt() %>%
+  fmt_number(columns = 3:4, decimals = 2) %>%
+  tab_options(column_labels.font.weight = 'bold')
+```
+
 
 Collecting a large amount of data and looking at it in excel is not helpful for humans, it does not give us any insights or knowledge.
 
