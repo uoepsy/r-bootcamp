@@ -137,7 +137,7 @@ knitr::include_graphics('https://upload.wikimedia.org/wikipedia/commons/0/01/R_t
 
 1. [Install XQuartz](http://xquartz.macosforge.org/)
 
-2. [Install R](https://cran.r-project.org/bin/macosx/). Click the release that has title R-<some number>.<some number>.<some number>.pkg
+2. [Install R](https://cran.r-project.org/bin/macosx/). Click the release that has title R-Number.Number.Number.pkg (for example R-4.0.5.pkg but this will change in the future).
 
 
 
