@@ -1,5 +1,5 @@
 ---
-title: "Getting started"
+title: "Lesson 0: Getting started"
 author:
   - name: Umberto Noe
     url: https://www.ed.ac.uk/profile/umberto-noe
@@ -8,7 +8,11 @@ author:
     url: https://www.ed.ac.uk/profile/josiah-pj-king
     affiliation: Department of Psychology, The University of Edinburgh
 date: "`r Sys.Date()`"
-output: distill::distill_article
+output: 
+  distill::distill_article:
+    toc: true
+    toc_depth: 2
+    toc_float: true
 ---
 
 ```{r setup, include=FALSE}
@@ -19,7 +23,14 @@ library(here)
 
 
 
-# Welcome!
+## Reading
+
+Required reading: 
+
+- [Chapter 1, Stat 545](https://stat545.com/install.html)
+
+
+## Prelude
 
 If you're here it's because you want to learn how to go from this
 
@@ -72,7 +83,7 @@ Knowledge is obtained by creating suitable summaries and visual displays from th
 
 
 
-# What you need
+## What you need
 
 To succeed in this bootcamp you will only need:
 
@@ -93,7 +104,7 @@ Ready, set, go!
 
 
 
-# What is R?
+## What is R?
 
 R is a programming language: an actual language that a computer can understand. The purpose of a programming language is to instruct the computer to do some boring and long computations on our behalf. 
 
@@ -119,10 +130,10 @@ knitr::include_graphics('https://upload.wikimedia.org/wikipedia/commons/0/01/R_t
 
 
 
-# Installing R (or updating R)
+## Installing R (or updating R)
 
 
-## Windows PC
+### Windows PC
 
 0. If you are updating R, uninstall all previous R or RTools programs you have installed in your PC. 
 
@@ -131,17 +142,17 @@ knitr::include_graphics('https://upload.wikimedia.org/wikipedia/commons/0/01/R_t
 2. [Install R](https://cran.r-project.org/bin/windows/base/)
 
 
-## macOS
+### macOS
 
 0. If you are updating R, uninstall all previous R installations you have by moving the R icon from the Applications folder to the Bin.
 
 1. [Install XQuartz](http://xquartz.macosforge.org/)
 
-2. [Install R](https://cran.r-project.org/bin/macosx/). Click the release that has title R-Number.Number.Number.pkg (for example R-4.0.5.pkg but this will change in the future).
+2. [Install R](https://cran.r-project.org/bin/macosx/). Click the release that has title R-Number.Number.Number.pkg (for example R-4.1.0.pkg but this will change in the future).
 
 
 
-# What is RStudio?
+## What is RStudio?
 
 RStudio is a nicer interface to R. It is simply a wrapper around R that combines a text editor, a file explorer, a help panel, and a graphics panel to see all your pictures.
 
@@ -164,7 +175,7 @@ knitr::include_graphics(here('images', 'rstudio-panes.png'))
 
 
 
-# Installing RStudio
+## Installing RStudio (or updating RStudio)
 
 0. If you have a previous version of RStudio already installed, uninstall it (if on Windows), or move it to the bin (if on a macOS).
 
@@ -179,16 +190,16 @@ update.packages(ask = FALSE)
 
 
 
-# Maintaining your installations up-to-date
+## Update regularly
 
-It is IMPORTANT that you keep your R and RStudio up-to-date. If you don't you will encounter many errors at some point.
+It is IMPORTANT that you keep your R and RStudio installations up-to-date. If you don't you will encounter many errors at some point.
 
 - Try to update R at least twice a year.
 - Try to update RStudio once every here.
 
 
 
-# Postlude
+## Postlude
 
 Whenever we say "open R" or "using R", what we really mean is "open RStudio" or "using RStudio".
 
