@@ -89,7 +89,7 @@ To succeed in this bootcamp you will only need:
 
 1. a laptop
   
-  If you are using a Chromebook, please contact us via email.
+  **Note**: If you are using a Chromebook, please contact us via email.
   
 2. active learning
   
@@ -132,6 +132,10 @@ knitr::include_graphics('https://upload.wikimedia.org/wikipedia/commons/0/01/R_t
 
 ## Installing R (or updating R)
 
+Click the section that applies to your specific PC to expand it.
+
+<details>
+<summary>Installing for Windows</summary>
 
 ### Windows PC
 
@@ -140,7 +144,10 @@ knitr::include_graphics('https://upload.wikimedia.org/wikipedia/commons/0/01/R_t
 1. [Install RTools](https://cran.r-project.org/bin/windows/Rtools/)
 
 2. [Install R](https://cran.r-project.org/bin/windows/base/)
+</details>
 
+<details>
+<summary>Installing for macOS</summary>
 
 ### macOS
 
@@ -149,7 +156,7 @@ knitr::include_graphics('https://upload.wikimedia.org/wikipedia/commons/0/01/R_t
 1. [Install XQuartz](http://xquartz.macosforge.org/)
 
 2. [Install R](https://cran.r-project.org/bin/macosx/). Click the release that has title R-Number.Number.Number.pkg (for example R-4.1.0.pkg but this will change in the future).
-
+</details>
 
 
 ## What is RStudio?
