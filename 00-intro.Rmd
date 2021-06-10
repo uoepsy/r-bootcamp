@@ -15,40 +15,78 @@ output:
     toc_float: true
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, fig.align = 'center')
+```
+
+```{r panelset, echo=FALSE}
+xaringanExtra::use_panelset()
+```
+
+```{r}
 library(here)
+library(tidyverse)
+library(palmerpenguins)
+library(rmarkdown)
+library(gt)
 ```
 
 
 
-## Reading
-
-Required reading: 
-
-- [Chapter 1, Stat 545](https://stat545.com/install.html)
-
-
 ## Prelude
 
-If you're here it's because you want to learn how to go from this
+Suppose you have data, lots of data. Perhaps they are about penguins, such these three different species of penguins:
+
+```{r, out.width = '70%', layout='l-body'}
+knitr::include_graphics('https://allisonhorst.github.io/palmerpenguins/reference/figures/lter_penguins.png')
+```
+<center>Artwork by \@allison_horst</center>
 
 <br>
 
-```{r echo=FALSE, layout = 'l-page'}
-library(tidyverse)
-library(palmerpenguins)
-library(rmarkdown)
+If you're here it's because you want to learn how to go from this:
 
+```{r echo=FALSE}
 paged_table(penguins, options = list(rows.print = 50))
 ```
 
 <br>
 
-to this
+to this:
+
+```{r echo=FALSE}
+penguins %>%
+  select(species, bill_length_mm, flipper_length_mm) %>%
+  group_by(species) %>%
+  summarise(Count = n(), 
+            M_Bill = mean(bill_length_mm, na.rm = T),
+            SD_Bill = sd(bill_length_mm, na.rm = T),
+            M_Flipper = mean(flipper_length_mm, na.rm = T),
+            SD_Flipper = sd(flipper_length_mm, na.rm = T)) %>%
+  gt(caption = 'Summary of bill and flipper lengths by species') %>%
+  tab_spanner(
+    label = "Bill length (mm)",
+    columns = c(M_Bill, SD_Bill)
+  ) %>%
+  tab_spanner(
+    label = "Flipper length (mm)",
+    columns = c(M_Flipper, SD_Flipper)
+  ) %>% 
+  cols_label(
+      M_Bill = 'M',
+      SD_Bill = 'SD',
+      M_Flipper = 'M',
+      SD_Flipper = 'SD',
+      species = 'Species'
+  ) %>%
+  fmt_number(columns = 3:6, decimals = 2)
+```
 
 <br>
+
+
+or this:
 
 ```{r echo=FALSE}
 ggplot(penguins, aes(flipper_length_mm, bill_length_mm, 
@@ -60,24 +98,10 @@ ggplot(penguins, aes(flipper_length_mm, bill_length_mm,
        pch = "Penguin species")
 ```
 
+
 <br>
 
-```{r echo=FALSE}
-library(gt)
-
-penguins %>%
-  group_by(species) %>%
-  summarise(`Count` = n(),
-            `Mean Bill Length` = mean(bill_length_mm, na.rm = T),
-            `Std. Dev. Bill Length` = sd(bill_length_mm, na.rm = T)) %>%
-  rename(Species = species) %>%
-  gt() %>%
-  fmt_number(columns = 3:4, decimals = 2) %>%
-  tab_options(column_labels.font.weight = 'bold')
-```
-
-
-Collecting a large amount of data and looking at it in excel is not helpful for humans, it does not give us any insights or knowledge.
+Collecting a large amount of data and looking at it in Excel or Numbers is not helpful for humans, it does not give us any insights or knowledge.
 
 Knowledge is obtained by creating suitable summaries and visual displays from the data.
 
@@ -98,31 +122,34 @@ To succeed in this bootcamp you will only need:
 3. willingness to learn
   
   If you approach the material with an inquisitive attitude, it will be easier to learn.
-  
-  
-Ready, set, go!
 
 
+## R
 
-## What is R?
+### What is R?
 
 R is a programming language: an actual language that a computer can understand. The purpose of a programming language is to instruct the computer to do some boring and long computations on our behalf. 
 
-When you learn to program you are in fact learning a new language, just like English, Italian, and so on. The only difference is that, since we will be communicating with a machine, the language itself needs to be unambiguous, concise, and hence very limited in its grammar and scope. Basically, a programming language follows a very strict set of rules. The computer will do **exactly** what you type. It will not try to understand what you want it to do and, if you make an error in your language, the computer will not fix it, but it will just do what you say. 
+When you learn to program you are in fact learning a new language, just like English, Italian, and so on. The only difference is that, since we will be communicating with a machine, the language itself needs to be unambiguous, concise, and hence very limited in its grammar and scope. Basically, a programming language follows a very strict set of rules. The computer will do **exactly** what you type. It will not try to understand what you want it to do and, if you make a language error, the computer will not fix it, but it will just execute exactly what you said. 
 
 If you commit an error, there are two possible outcomes:
 
-1. The computation goes ahead without any sign of errors nor messages. This is the most worrying type of error as it's hard to catch. You will get a result for your computation, but it may make no sense.
+1. The computation goes ahead without any sign of errors or messages. This is the most worrying type of error as it's hard to catch. You will get a result for your computation, but it may make no sense.
 2. The computer will tell you that what you're asking to do doesn't make sense. Easier to fix!
 
 
-The programming language that you will learn is called R.
+The programming language that you will learn is called R. It also has a very fancy logo:
+
+```{r, layout="l-body", out.width='20%'}
+knitr::include_graphics('https://cran.r-project.org/Rlogo.svg')
+```
 
 
-The code you type using the R programming language then will need to be converted to lower level instructions for the computer, such as "store this number into memory location with a specific address". This is done by the **interpreter** which, is also called R. So R is both the programming language and the interpreter telling the computer what to do with your commands.
+
+The code you type using the R programming language then will need to be converted to lower level instructions for the computer, such as "store this number into memory location with a specific address". This is done by the *interpreter* which, is also called R. So R is both the programming language and the interpreter telling the computer what to do with your commands.
 
 
-How does R look?
+How does R look? Exactly as the picture below. It comes into a window called the *Console*, which is where any R code you type there will be executed.
 
 ```{r echo=FALSE, out.width = '100%', layout='l-body'}
 knitr::include_graphics('https://upload.wikimedia.org/wikipedia/commons/0/01/R_terminal.jpg')
@@ -130,7 +157,7 @@ knitr::include_graphics('https://upload.wikimedia.org/wikipedia/commons/0/01/R_t
 
 
 
-## Installing R (or updating R)
+### Installing/updating R
 
 Click the section that applies to your specific PC to expand it.
 
@@ -159,30 +186,43 @@ Click the section that applies to your specific PC to expand it.
 </details>
 
 
-## What is RStudio?
 
-RStudio is a nicer interface to R. It is simply a wrapper around R that combines a text editor, a file explorer, a help panel, and a graphics panel to see all your pictures.
+## RStudio
 
-Let's have a look at it:
+### What is RStudio?
+
+RStudio is a nicer interface to R. It is simply a wrapper around R that combines the R _Console_, a text editor, a file explorer, a help panel, and a graphics panel to see all your pictures.
+
+In summary:
+
+- R is the engine
+- RStudio is the dashboard
+
+![](https://d33wubrfki0l68.cloudfront.net/0b4d0569b2ddf6147da90b110fbb2a17653c8b08/f06f3/images/shutterstock/r_vs_rstudio_1.png){width=100%}
+<center>Source: www.moderndive.com</center>
+\
+Let's see how RStudio looks:
 
 ```{r echo=FALSE}
 knitr::include_graphics(here('images', 'rstudio-panes.png'))
 ```
 
-1. The __editor__ is where you write you write your files with commands for the computer using the R language.
-  
-  If you cannot see the editor, you have to open a new file. Click "File" -> "New file" -> "R Markdown"
+It has four panels or panes, described below. You can customise the appearance of the panes by clicking in the menu View -> Panes -> Pane Layout.
 
-2. The commands get then sent to the R __console__, which runs them and actually does the computation and displays the result.
+- *R Console.* The R console (bottom left) is where the code gets executed. If you type a command there and press enter, it will generate results/output. Writing all the code here is not handy however if you need to do lots of computations, and the code you write will not be saved and you will not be able to re-run the same steps on another day.
 
-3. The __environment__ shows the things you have created, for example data.
+- *Code Editor.* It is better to type code in a special file, an R script, where you can save the code so that you can continue your work on another day. R scripts are opened in the code editor (top left). This is where you write your files with R code. Then, to run each line of code you wrote, you place  your cursor at the end of each line and press Control+Enter (Windows) or Command+Enter (macOS). This way, the code get then sent to the R console to actually do the computation and display the result.
+\
+**Note**. If you cannot see the editor, you have to open a new file. From the menu click "File" -> "New file" -> "R Script"
 
-4. The __plots and files__ panel displays any plots you create and, if you click the files tab, it has a file explorer for you to find files and data stored in excel or similar.
+3. *Environment.* The environment shows the things you have created, for example data.
+
+4. *Plots and Files.* The plots and files panel displays any plots you create and, if you click the files tab, it has a file explorer for you to find files and data stored in excel or similar. There is also a _Help_ tab here, which is where you get help for R code.
 
 
 
 
-## Installing RStudio (or updating RStudio)
+### Installing/updating RStudio
 
 0. If you have a previous version of RStudio already installed, uninstall it (if on Windows), or move it to the bin (if on a macOS).
 
@@ -213,3 +253,11 @@ Whenever we say "open R" or "using R", what we really mean is "open RStudio" or 
 You should always using RStudio to write code. So, even if you will have two applications in your computer: R and RStudio, you will only need to open RStudio for your day-to-day work.
 
 
+
+
+## Readings
+
+For further information, check to the following:
+
+- [Moderndive, Chapter 1](https://moderndive.com/1-getting-started.html)
+- [Stat 545, Chapter 1](https://stat545.com/install.html)

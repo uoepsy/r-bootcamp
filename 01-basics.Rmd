@@ -1,0 +1,712 @@
+---
+title: "R basics"
+author:
+  - name: Umberto Noe
+    url: https://www.ed.ac.uk/profile/umberto-noe
+    affiliation: Department of Psychology, The University of Edinburgh
+  - name: Josiah King
+    url: https://www.ed.ac.uk/profile/josiah-pj-king
+    affiliation: Department of Psychology, The University of Edinburgh
+date: "`r Sys.Date()`"
+output: distill::distill_article
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r panelset, echo=FALSE}
+xaringanExtra::use_panelset()
+```
+
+```{r echo=FALSE}
+library(here)
+library(tidyverse)
+library(gt)
+```
+
+
+
+## Prelude
+
+**Be organised!**
+
+When writing code, it is fundamental to be organised. Create a different folder for each course or project that can be considered a self-contained box.
+
+In that folder you will store:
+
+- code files (called R scripts)
+- subfolders with other items within them; for example a subfolder called "data" containing the data to analyse
+
+In your computer, create a folder called "r-bootcamp", in which you will do all the work for this course.
+Go inside the r-bootcamp folder, and create a subfolder called _data_.
+
+Now go ahead and open RStudio!
+
+
+## R scripts
+
+Typing code in the console is handy because it is interactive and returns a result immediately, but writing in the console is only recommended for very quick calculations. Longer code should be written in special code files, so that you can save all your work and get back to it another day.
+If you typed all your code in the console, you would lose it and you won't be able to build on top of what you did on previous days of work. You would have to always start from scratch!
+
+
+We write code in R scripts. These are simply text files with a file name ending with extension _.R_
+
+In an R script you will write your code and, when you're happy with it, you can send it to the console for execution by either highlighting it and clicking _Run_ on the top right of the editor, or placing your cursor at the end of each line and pressing Control+Enter (on Windows) or Command+Enter (on macOS).
+
+
+Once you opened RStudio, you can create a new R script file using any of these methods.
+
+**1. RStudio menu**  
+From the RStudio menu, click File -> New File -> R script
+
+**2. Editor menu**  
+On the Editor panel, click the first icon on the top-left, then select script.
+
+![](images/r-script.png){width=100%}
+
+
+**Give a useful name and save your R script!**
+
+You should give a useful name to your R script, otherwise if in a month time you will try to find some code you wrote in the past, you won't find it.
+
+
+In summary, an R script 
+
+- is a text file in which you will type your R code before sending it to the console (which will run it).
+- has a file name ending with .R such as _lesson1.R_
+
+
+## R is a calculator
+
+It's time to throw away that table calculator you perhaps had in high school. R is smarter and lets you do bigger calculations much faster!
+
+In the R script _lesson1.R_ type the following. 
+
+```{r eval=F}
+2 + 2
+3 * 4
+6 / 2
+2^3
+```
+
+Then, place your cursor at the end of the first line and press Ctrl + Enter (on Windows) or Cmd + Enter (on macOS) to send the code to the console to be executed.
+Each time you press Ctrl/Cmd + Enter, the cursor will move to the next line for you!
+
+You should see the following output in the console:
+
+```{r}
+2 + 2
+3 * 4
+6 / 2
+2^3
+```
+
+We can also add comments to explain what code does. Comments are helpful when the computation is complex and hard to understand, so in the following example it's not really needed, but it's just meant to show you how to add comments.
+
+In an R script a comment is provided by the hash symbol, `#`. Anything written after an hash symbol will not be run by the R console as it will be interpreted as a reminder/explanatory message for the reader.
+
+```{r eval=T}
+# Power
+2^3
+```
+
+```{r eval=T}
+sqrt(9) # anything after the hash gets ignored by R
+```
+
+
+R ignores spaces, and the following will all return the same result:
+
+- `2 + 2`
+- `2+2`
+- `2 +2`
+- `2+ 2`
+
+However, we added a space before and after arithmetic operators such as `+`, `-`, `*` to make it easier to read. Typically, we do not add spaces around powers.
+
+Let's consider again this operation:
+
+```{r}
+3 * 4
+```
+
+In the above example, [1] indicates that the output is the first element of a vector of length 1 (we will discuss vectors later in this course. 
+
+
+It is important for you to try the extra examples that follow. Remember that to successfully learn programming you need to actually type the code.
+
+
+```{r}
+5 * (4 - 2)
+sqrt(4)
+sqrt(9)
+abs(-5)
+abs(3)
+```
+
+
+In the examples above, `sqrt()` and `abs()` are examples of so-called _functions_. Functions take some input (or multiple inputs), do some computation with those inputs, and return a result or output.
+
+Here, the function `sqrt()` takes a nonnegative number and returns its square root. The `abs()` function takes a number as input and, if the input is nonnegative, it returns the same number; while if the input is negative, it makes it positive.
+
+R has many other functions, and users can even create their own functions. We will see more on this later on. 
+
+
+
+## Objects
+
+R can store information by creating an _object_ with a name of our choice. Typically, it is recommended to use a name that makes sense for the value that is being stored.
+
+Once you have create an object, you can simply refer to it by name.
+
+The name of an object must follow some rules:
+
+- It cannot begin with a number (but it can contain numbers)
+
+- It cannot contain spaces
+
+- It cannot use special characters such as `$`, `%`, `+`, `-`, `*`, `/`, `^` which have a special meaning in R.
+
+The Environment panel (top-right of RStudio) will display all the objects that you have created in the current R session.
+
+We use the _assignment operator_ `<-` to assign some value to an object:
+
+```
+name <- computation
+```
+
+To see the actual value, simply call the name of the object:
+
+```{r}
+x <- log(2^3)
+x
+```
+
+The arrow means: take what's on the right and assign it to the name on the left.
+
+__Note__: If you do not wish to view the result, as sometimes it may print too much stuff, simply do not call the name of the variable.
+
+```{r}
+x <- log(2^3)
+```
+
+You can then use the object to do subsequent computations:
+
+```{r}
+x * 3
+```
+
+Note that if you assign a different value to the same object name, then the value of the object will be changed. So be careful to not overwrite objects that you plan to use later!
+
+```{r}
+x <- log(2^3)
+x
+
+x <- 1000 - 500
+x
+```
+
+
+Another thing to pay attention to is that R is case sensitive. `Hello` is not the same as either `hello` or `HELLO`. As a consequence, we receive an error in the R console when we type `X` rather than `x`, which is defined above.
+
+```{r error=T}
+X
+```
+
+
+Getting familiar with programming errors or bugs is part of learning to program. Do not panic when you get an error, it doesn't mean the PC is exploding. You can make as many errors as you want and fix them iteratively.
+
+In programming you actually learn from your errors. The tricky part is figuring out how to fix them, and you will learn this with time.
+Here, the error message tells us that the object `X` does not exist. We can see the list of existing objects in the Environment tab in the upper-right window, where we will find that the correct object is `x`. It is also possible to obtain the same list of created objects by using the `ls()` function.
+
+```{r}
+ls()
+```
+
+Until now we have only assigned numbers to an object, but R can also store other types of values as objects. For example, you can store a string of characters by enclosing it by double quotation marks or single quotation marks. Don't mix and match!
+
+```{r}
+edinburgh <- "university"
+edinburgh
+```
+
+In character strings spacing is allowed:
+
+```{r}
+edinburgh <- "department of psychology"
+edinburgh
+```
+
+
+Also note that R treats numbers a characters if you tell it to do so:
+
+```{r}
+result <- "8"
+result
+```
+
+
+However, you cannot perform arithmetic operations on characters as those are defined for numbers only. For example, trying to do addition or taking the square root of a character string will return an error:
+
+```{r error=T}
+result + 2
+sqrt(result)
+```
+
+
+R knows what kind of operations make sense on each object by assigning each object to a specific _class._ For example, numbers such as 2, 8, 1000, 3.2 are of class _numeric_, while character strings such as the words `"aja", "martin"` are of class _character_.
+The function `class()` will tell you what class is your object.
+
+```{r}
+result
+class(result)
+
+class(3.6)
+
+x <- 5
+class(x)
+
+class("josiah")
+class("5")
+
+class(sqrt)
+```
+
+
+There are many other classes in R, and these will be introduced along this course.
+
+
+<details>
+<summary>You can also use `=` for assignment</summary>
+To assign a value to an object, you can use either the arrow `<-` or the equal sign `=`. However, the R community prefers the use of the former.
+
+```{r}
+y <- sqrt(25)
+y
+
+z = sqrt(25)
+z
+```
+</details>
+
+## Conditions
+
+How do we check whether or not some condition holds? For example, is 2\^3 equal to 8?
+The answer can be either TRUE or FALSE. That is what R will print.
+
+To check whether a something equals something else, we use double equal signs `==` (to distinguish with the single equal used to assign a value to a variable):
+
+```{r}
+2^3 == 8
+2^3 == 12
+```
+
+To check whether a value is smaller than another:
+
+```{r}
+3 < 8
+3 > 8
+```
+
+
+::: {.panelset}
+::: {.panel}
+#### Exercise
+
+What does each of the following check for?
+
+```{r eval=FALSE}
+4 <= 4
+4 <= 5
+4 >= 4
+4 >= 5
+```
+:::
+
+::: {.panel}
+#### Answer
+
+We use `<=` to test whether the LHS is less than or equal to the RHS:
+
+```{r}
+4 <= 4
+4 <= 5
+```
+
+We use `>=` to test whether the LHS is greater than or equal to the RHS:
+
+```{r}
+4 >= 4
+4 >= 5
+```
+:::
+:::
+
+
+::: {.panelset}
+::: {.panel}
+## Exercise
+Let:
+
+```{r}
+x = 18
+y = 10
+```
+
+a. Is `x < y`?
+b. Is `log(y) < x`?
+:::
+
+::: {.panel}
+## Answer
+
+a. Is `x < y`?
+
+```{r}
+x < y
+```
+
+b. Is `log(y) < x`?
+
+```{r}
+log(x) < y
+```
+
+:::
+:::
+
+
+
+
+## Parentheses
+
+Sometimes we want to do some computations before others, and to give order we use the parentheses.
+
+If you do not use parentheses, the order of precedence is 
+
+1. ^ 
+1. \* or /, whatever appears first
+1. \+ or -, whatever appears first
+
+
+```{r}
+(5 + 3) * 2
+5 + 3 * 2
+5 + (3 * 2)
+```
+
+```{r}
+(5 + 6) / 2
+5 + 6 / 2
+5 + (6 / 2)
+```
+
+
+
+## Vectors
+
+What if we wanted to store multiple values? For example, you may want to do a computation involving multiple data values.  
+This section will present the simplest and _most inefficient_ way of entering data into R, which involves creating a vector.
+
+A vector is an ordered listing of entries. If all entries are numbers, we have a numeric vector. If all entries are character strings, we have a character vector.
+
+The following table reports the world population estimates (in thousands) for the past few decades.
+
+```{r echo=F}
+world_pop <- tibble(
+  year = c(1950L, 1960L, 1970L, 1980L, 1990L, 2000L, 2010L, 2020L),
+  pop = as.numeric(c("2536431", "3034950", "3700437", "4458003", "5327231", "6143494", "6956824", "7794799"))
+)
+
+gt(world_pop, caption = "World Population Estimates.") %>%
+  cols_label(
+    year = md("*Year*"),
+    pop = md("*World population*<br>(thousands)")
+  ) %>%
+  cols_align(
+    align = c("center"),
+    columns = everything()
+  ) %>%
+  cols_width(everything() ~ px(150)) %>%
+  tab_source_note(
+    source_note = md('*Source:* United Nations, Department of Economic and Social Affairs, Population Division (2019). *World Population Prospects 2019, Online Edition. Rev. 1.*')
+  )
+```
+
+
+We can now enter the world population estimates into R by creating a numeric vector object. To do so, we use the combine function `c()` which combines together different entries. The entries should be provided to the `c()` function separated by commas:
+
+```{r}
+world_pop <- c(2536431, 3034950, 3700437, 4458003, 
+               5327231, 6143494, 6956824, 7794799)
+world_pop
+```
+
+Note that the combine function can also be used to concatenate two separate vectors:
+
+```{r}
+pop_first_half <- c(2536431, 3034950, 3700437, 4458003)
+pop_second_half <- c(5327231, 6143494, 6956824, 7794799)
+pop_all <- c(pop_first_half, pop_second_half)
+pop_all
+```
+
+
+We can check the number of items in the `world_pop` vector with the `length()` function:
+
+```{r}
+length(world_pop)
+```
+
+We can compute the average world population for the period 1950-2020 with the function:
+
+```{r}
+mean(world_pop)
+```
+
+Clearly, you could have done it by hand, summing all grades up and dividing the sum by 8. However, do you have the patience to do this for thousands of numbers? No, this is why we use R.
+
+We can verify that the average grade is the same as the sum of the numbers divided by the number of entries:
+
+```{r}
+sum(world_pop) / length(world_pop)
+```
+
+As you saw above, the `sum()` function takes a vector and sums up all values inside.
+
+
+To access specific entries of a vector we use square brackets and inside those we specify which entry we want. This is called _indexing._
+
+```{r}
+world_pop[1]  # first entry, i.e. for year 1950
+world_pop[3]
+world_pop[8]  # last entry, i.e. for year 2020
+```
+
+Multiple elements can be extracted via a vector of indices within square brackets.
+If an index is negative, the corresponding entry is removed from the vector.
+Note that none of these operations change the original vector, because we have not ovewritten the object via an assignment.
+
+```{r}
+world_pop[c(2, 5)]
+world_pop[c(5, 2)]
+world_pop[-2]
+```
+
+
+Since the vector is a numeric vector, we can perform arithmetic operations on it.
+For example, we may wish to express the world population in millions rather than thousands:
+
+```{r}
+pop_millions <- world_pop / 1000
+pop_millions
+```
+
+Alternatively, we could be interested in the rate of increase relative to the year 1950 (which is the first entry in the vector):
+
+```{r}
+pop_rate <- world_pop / world_pop[1]
+pop_rate
+```
+
+
+You can also perform calculations using multiple vectors. In such case the operation is performed element by element.
+
+Say you were interested in the population increase for each decade. This corresponds to the increase in a decade divided by the population at the start of the decade.
+
+For example is the population was 100 thousands in a year, and became 120 thousands after 10 years, the percentage increase would be 20%.
+
+To compute the percentage increase we must obtain a vector without the first decade, and another vector without the last decade.
+Then we must subtract the second vector from the first, such that the first entry would then be the difference in population between the years 1960 and 1950.
+
+```{r}
+world_pop[-1]
+world_pop[-8]
+
+pop_increase <- (world_pop[-1] - world_pop[-8])
+perc_increase <- 100 * (pop_increase / world_pop[-8])
+perc_increase
+```
+
+
+Finally, you can replace values in a vector by combining indexing and assignment.
+Let's replace the first three entries with their rounded values:
+
+```{r}
+perc_increase[c(1, 2, 3)] <- c(20, 22, 20)
+perc_increase
+```
+
+
+## A taste of functions
+
+Functions are pieces of code that take one or more inputs (also called arguments), do some computation on those, and return an output.
+
+In the code `sqrt(25)`, `sqrt` is the function and `25` is the input or argument.
+
+We have already seen some functions, for example `sqrt()`, `mean()`, `class()`, and `c()`.
+
+We can write our own function that computes the mean:
+
+```{r}
+my_mean <- function(data) {
+  m <- sum(data) / length(data)
+  return(m)
+}
+```
+
+Here, we have created a function called `my_mean`, which takes one input, `data`, and does some computation on it.
+It creates an object `m` equal to the sum of the data divided by the length, and returns it.
+
+We can then call our function on the world population data
+
+```{r}
+my_mean(world_pop)
+
+# is it equal to the built-in function?
+mean(world_pop)
+```
+
+What type of object is `my_mean`? 
+
+```{r}
+class(my_mean)
+```
+
+Clearly, it's an object of class function.
+
+
+
+
+## Factors
+
+So far we have seen different classes of objects:
+
+- numeric
+- character
+- function
+
+However, there is another important class: *factors*. 
+
+A factor object stores data representing fixed and pre-specified categories. Such data arise for example in clinical trials, where participants are given either a placebo, a treatment already in use, or a new alternative treatment --- in short "Placebo", "DrugA", or "DrugB".
+Another example would be in questionnaires, where an user is asked to rate their experience as "excellent", "very good", "good", "neutral",  "poor", "very poor".
+
+Clearly, in the clinical trial it would be an error if one of the data said "DrugE" as this is not identified in the problem. Similarly, in the questionnaire example, it would be an error if a data value said "peppapig".
+
+To protect ourselves from wrong entries and to tell R that some data can only take a limited set of values, we use factors.
+
+```{r}
+clinical <- factor(c('A', 'B', 'A', 'Placebo','A', 'Placebo', 'B', 'Placebo'),
+                   levels = c('Placebo', 'A', 'B'))
+clinical
+```
+
+
+The distinct categories that the data can take are called levels of the factors.
+You can inspect the factor levels with the `levels()` function:
+
+```{r}
+levels(clinical)
+```
+
+```{r}
+length(clinical) # we have 8 elements in the vector
+class(clinical) # factor vector
+```
+
+
+What if we made an error when inputting the data and the 3rd participants had actually taken drug B? We can fix it as follows:
+
+```{r}
+clinical[3] <- 'B'
+clinical
+```
+
+Now, say you made a typing error and wrote lowercase b (note that R distinguishes between uppercase and lowercase, they are not the same thing!), you would get a <NA> (= not available) value because "b" is not among the pre-specified values.
+This safeguards you from potential errors, for example if you tried to write anything else, like drug C (which didn't exist) or anything else, e.g. "peppapig":
+
+```{r}
+clinical[3] <- 'b'
+clinical
+
+clinical[3] <- 'peppapig'
+clinical
+```
+
+
+
+### Renaming a level of a factor
+
+::: {.panelset}
+::: {.panel}
+#### Exercise 
+
+Rename the values "Placebo" to "P".
+
+**Hint:** look at the help for the `factor()` function. The argument `labels` might be helpful.
+
+```{r eval=F}
+clinical <- factor(c('A', 'B', 'A', 'Placebo','A', 'Placebo', 'B', 'Placebo'),
+                   levels = c('Placebo', 'A', 'B'),
+                   labels = ...)
+clinical
+```
+:::
+
+
+::: {.panel}
+#### Answer 
+```{r}
+clinical <- factor(c('A', 'B', 'A', 'Placebo','A', 'Placebo', 'B', 'Placebo'),
+                   levels = c('Placebo', 'A', 'B'),
+                   labels = c('P', 'A', 'B'))
+clinical
+```
+:::
+:::
+
+
+### Collapsing two levels into a single one
+
+::: {.panelset}
+::: {.panel}
+#### Exercise 
+
+Relabel drug A and B to just be "Treatment". In other words, the factor should just say whether the participant had a placebo or was treated.
+
+```{r eval=F}
+clinical <- factor(c('A', 'B', 'A', 'Placebo','A', 'Placebo', 'B', 'Placebo'),
+                   levels = c('Placebo', 'A', 'B'),
+                   labels = ...)
+clinical
+```
+:::
+
+
+::: {.panel}
+#### Answer 
+```{r}
+clinical <- factor(c('A', 'B', 'A', 'Placebo','A', 'Placebo', 'B', 'Placebo'),
+                   levels = c('Placebo', 'A', 'B'),
+                   labels = c('Placebo', 'Treatment', 'Treatment'))
+clinical
+```
+:::
+:::
+
+
+
+## Readings
+
+For further information, check to the following:
+
+- [Chapter 2, Stat 545](https://stat545.com/r-basics.html)
+
+I know, the website above prefers using `<-` for assignment, rather than `=`. 
+
+> Don’t be lazy and use =, although it would work, because it will just sow confusion later. Instead, utilize RStudio’s keyboard shortcut: Alt + - (the minus sign).
+
+However, as you will see during your academic career, there is no consensus on many topics, and I personally prefer the `=` sign. You will see the different people use either for assignment.
+
