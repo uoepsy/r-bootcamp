@@ -109,7 +109,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["R basics"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url","affiliation"]}},"value":[{"type":"character","attributes":{},"value":["Umberto Noe"]},{"type":"character","attributes":{},"value":["https://www.ed.ac.uk/profile/umberto-noe"]},{"type":"character","attributes":{},"value":["Department of Psychology, The University of Edinburgh"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url","affiliation"]}},"value":[{"type":"character","attributes":{},"value":["Josiah King"]},{"type":"character","attributes":{},"value":["https://www.ed.ac.uk/profile/josiah-pj-king"]},{"type":"character","attributes":{},"value":["Department of Psychology, The University of Edinburgh"]}]}]},{"type":"character","attributes":{},"value":["2021-06-10"]},{"type":"character","attributes":{},"value":["distill::distill_article"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["R basics"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url","affiliation"]}},"value":[{"type":"character","attributes":{},"value":["Umberto Noe"]},{"type":"character","attributes":{},"value":["https://www.ed.ac.uk/profile/umberto-noe"]},{"type":"character","attributes":{},"value":["Department of Psychology, The University of Edinburgh"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url","affiliation"]}},"value":[{"type":"character","attributes":{},"value":["Josiah King"]},{"type":"character","attributes":{},"value":["https://www.ed.ac.uk/profile/josiah-pj-king"]},{"type":"character","attributes":{},"value":["Department of Psychology, The University of Edinburgh"]}]}]},{"type":"character","attributes":{},"value":["2021-06-10"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","toc_depth","toc_float"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"integer","attributes":{},"value":[2]},{"type":"logical","attributes":{},"value":[true]}]}]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   
@@ -1480,6 +1480,23 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </div>
 
 <div class="d-article">
+<div class="d-contents d-contents-float">
+<nav class="l-text toc figcaption" id="TOC">
+<h3>Contents</h3>
+<ul>
+<li><a href="#prelude">Prelude</a></li>
+<li><a href="#r-scripts">R scripts</a></li>
+<li><a href="#r-is-a-calculator">R is a calculator</a></li>
+<li><a href="#objects">Objects</a></li>
+<li><a href="#conditions">Conditions</a></li>
+<li><a href="#parentheses">Parentheses</a></li>
+<li><a href="#vectors">Vectors</a></li>
+<li><a href="#a-taste-of-functions">A taste of functions</a></li>
+<li><a href="#factors">Factors</a></li>
+<li><a href="#readings">Readings</a></li>
+</ul>
+</nav>
+</div>
 <div class="layout-chunk" data-layout="l-body">
 
 </div>
@@ -1943,12 +1960,12 @@ This section will present the simplest and <em>most inefficient</em> way of ente
 <p>A vector is an ordered listing of entries. If all entries are numbers, we have a numeric vector. If all entries are character strings, we have a character vector.</p>
 <p>The following table reports the world population estimates (in thousands) for the past few decades.</p>
 <div class="layout-chunk" data-layout="l-body">
-<div id="vaphynianh" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="efnazucrsk" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#vaphynianh .gt_table {
+#efnazucrsk .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -1973,7 +1990,7 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   border-left-color: #D3D3D3;
 }
 
-#vaphynianh .gt_heading {
+#efnazucrsk .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1985,7 +2002,7 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   border-right-color: #D3D3D3;
 }
 
-#vaphynianh .gt_title {
+#efnazucrsk .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1995,7 +2012,7 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   border-bottom-width: 0;
 }
 
-#vaphynianh .gt_subtitle {
+#efnazucrsk .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2005,13 +2022,13 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   border-top-width: 0;
 }
 
-#vaphynianh .gt_bottom_border {
+#efnazucrsk .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#vaphynianh .gt_col_headings {
+#efnazucrsk .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2026,7 +2043,7 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   border-right-color: #D3D3D3;
 }
 
-#vaphynianh .gt_col_heading {
+#efnazucrsk .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2046,7 +2063,7 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   overflow-x: hidden;
 }
 
-#vaphynianh .gt_column_spanner_outer {
+#efnazucrsk .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2058,15 +2075,15 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   padding-right: 4px;
 }
 
-#vaphynianh .gt_column_spanner_outer:first-child {
+#efnazucrsk .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#vaphynianh .gt_column_spanner_outer:last-child {
+#efnazucrsk .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#vaphynianh .gt_column_spanner {
+#efnazucrsk .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2078,7 +2095,7 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   width: 100%;
 }
 
-#vaphynianh .gt_group_heading {
+#efnazucrsk .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2100,7 +2117,7 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   vertical-align: middle;
 }
 
-#vaphynianh .gt_empty_group_heading {
+#efnazucrsk .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2115,15 +2132,15 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   vertical-align: middle;
 }
 
-#vaphynianh .gt_from_md > :first-child {
+#efnazucrsk .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#vaphynianh .gt_from_md > :last-child {
+#efnazucrsk .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#vaphynianh .gt_row {
+#efnazucrsk .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2142,7 +2159,7 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   overflow-x: hidden;
 }
 
-#vaphynianh .gt_stub {
+#efnazucrsk .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2154,7 +2171,7 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   padding-left: 12px;
 }
 
-#vaphynianh .gt_summary_row {
+#efnazucrsk .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2164,7 +2181,7 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   padding-right: 5px;
 }
 
-#vaphynianh .gt_first_summary_row {
+#efnazucrsk .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2174,7 +2191,7 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   border-top-color: #D3D3D3;
 }
 
-#vaphynianh .gt_grand_summary_row {
+#efnazucrsk .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2184,7 +2201,7 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   padding-right: 5px;
 }
 
-#vaphynianh .gt_first_grand_summary_row {
+#efnazucrsk .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2194,11 +2211,11 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   border-top-color: #D3D3D3;
 }
 
-#vaphynianh .gt_striped {
+#efnazucrsk .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#vaphynianh .gt_table_body {
+#efnazucrsk .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2207,7 +2224,7 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   border-bottom-color: #D3D3D3;
 }
 
-#vaphynianh .gt_footnotes {
+#efnazucrsk .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2221,13 +2238,13 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   border-right-color: #D3D3D3;
 }
 
-#vaphynianh .gt_footnote {
+#efnazucrsk .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#vaphynianh .gt_sourcenotes {
+#efnazucrsk .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2241,41 +2258,41 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   border-right-color: #D3D3D3;
 }
 
-#vaphynianh .gt_sourcenote {
+#efnazucrsk .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#vaphynianh .gt_left {
+#efnazucrsk .gt_left {
   text-align: left;
 }
 
-#vaphynianh .gt_center {
+#efnazucrsk .gt_center {
   text-align: center;
 }
 
-#vaphynianh .gt_right {
+#efnazucrsk .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#vaphynianh .gt_font_normal {
+#efnazucrsk .gt_font_normal {
   font-weight: normal;
 }
 
-#vaphynianh .gt_font_bold {
+#efnazucrsk .gt_font_bold {
   font-weight: bold;
 }
 
-#vaphynianh .gt_font_italic {
+#efnazucrsk .gt_font_italic {
   font-style: italic;
 }
 
-#vaphynianh .gt_super {
+#efnazucrsk .gt_super {
   font-size: 65%;
 }
 
-#vaphynianh .gt_footnote_marks {
+#efnazucrsk .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;

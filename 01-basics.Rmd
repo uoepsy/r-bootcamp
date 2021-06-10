@@ -8,7 +8,11 @@ author:
     url: https://www.ed.ac.uk/profile/josiah-pj-king
     affiliation: Department of Psychology, The University of Edinburgh
 date: "`r Sys.Date()`"
-output: distill::distill_article
+output: 
+  distill::distill_article:
+    toc: true
+    toc_depth: 2
+    toc_float: true
 ---
 
 
