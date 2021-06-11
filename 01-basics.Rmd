@@ -130,6 +130,20 @@ R ignores spaces, and the following will all return the same result:
 
 However, we added a space before and after arithmetic operators such as `+`, `-`, `*` to make it easier to read. Typically, we do not add spaces around powers.
 
+
+\
+
+<details open>
+<summary>**Checkpoint**</summary>
+
+Your R script should look something like this by now:
+
+![](images/01-example-script.png){width=100%}
+
+</details>
+\
+
+
 Let's consider again this operation:
 
 ```{r}
@@ -279,11 +293,12 @@ class(sqrt)
 ```
 
 
-There are many other classes in R, and these will be introduced along this course.
+There are many other classes in R, and you will see more as you proceed through the course.
 
+\
 
-<details>
-<summary>You can also use `=` for assignment</summary>
+<details open>
+<summary>**You can also use `=` for assignment**</summary>
 To assign a value to an object, you can use either the arrow `<-` or the equal sign `=`. However, the R community prefers the use of the former.
 
 ```{r}
@@ -294,6 +309,8 @@ z = sqrt(25)
 z
 ```
 </details>
+
+
 
 ## Conditions
 
@@ -355,8 +372,8 @@ We use `>=` to test whether the LHS is greater than or equal to the RHS:
 Let:
 
 ```{r}
-x = 18
-y = 10
+x <- 18
+y <- 10
 ```
 
 a. Is `x < y`?
@@ -380,6 +397,48 @@ log(x) < y
 
 :::
 :::
+
+
+
+You can assign conditions to an object, say
+
+```{r}
+out <- 3 > 2
+out
+```
+
+
+The `out` object is an object of class _logical_, or a logical object in short --- which is exactly what the values TRUE and FALSE are, logical values.
+
+```{r}
+class(out)
+class(TRUE)
+class(FALSE)
+```
+
+
+If you try to perform arithmetic operations on logicals, TRUE is converted to 1 and FALSE to 0.
+
+```{r}
+TRUE * 2
+FALSE * 2
+```
+
+In general, to convert logical to numeric you can either multiply the values by 1, or use the `as.numeric()` function
+
+```{r}
+(5 > 6) * 1
+(5 < 6) * 1
+as.numeric(TRUE)
+```
+
+To convert instead 1/0 to logical TRUE/FALSE, you use the `as.logical()` function:
+
+```{r}
+as.logical(1)
+as.logical(0)
+```
+
 
 
 
@@ -542,6 +601,39 @@ Let's replace the first three entries with their rounded values:
 perc_increase[c(1, 2, 3)] <- c(20, 22, 20)
 perc_increase
 ```
+
+
+## Logical indexing
+
+
+How would you keep all population estimates greater than the average?
+
+```{r}
+world_pop
+
+mean_pop <- mean(world_pop)
+mean_pop
+```
+
+First, construct a logical vector by applying a condition to each entry of the vector:
+
+```{r}
+world_pop > mean_pop
+```
+
+Then, simply provide that logical vector as indexing. Only the elements with a TRUE index will be returned
+
+```{r}
+world_pop[world_pop > mean_pop]
+```
+
+You can also create an indexing object and use that:
+
+```{r}
+idx <- world_pop > mean_pop
+world_pop[idx]
+```
+
 
 
 ## A taste of functions
@@ -713,4 +805,5 @@ I know, the website above prefers using `<-` for assignment, rather than `=`.
 > Don’t be lazy and use =, although it would work, because it will just sow confusion later. Instead, utilize RStudio’s keyboard shortcut: Alt + - (the minus sign).
 
 However, as you will see during your academic career, there is no consensus on many topics, and I personally prefer the `=` sign. You will see the different people use either for assignment.
+
 

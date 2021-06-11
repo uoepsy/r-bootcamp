@@ -1,5 +1,5 @@
 ---
-title: "Lesson 0: Getting started"
+title: "Getting started"
 author:
   - name: Umberto Noe
     url: https://www.ed.ac.uk/profile/umberto-noe
@@ -245,6 +245,35 @@ It is IMPORTANT that you keep your R and RStudio installations up-to-date. If yo
 - Try to update RStudio once every here.
 
 
+
+## Adding Functionality
+
+R comes pre-packed with lots of functionality. You are able to perform computations, graphics, and more.
+
+However, sometime you may wish to use additional functionality that does not come directly with the installed software. R is a free and open-source programming language, with a vast user network. This has led in turn to a myriad of user-contributed additional functionality, each bundled in different packages (also called libraries).
+
+These packages are stored in the [Comprehensive R Archive Network](https://cran.r-project.org/web/packages/available_packages_by_name.html) (CRAN) and can be installed.
+
+As we said, some package are pre-shipped with your R installation. Examples are the base, stats, and graphics packages. Each of those can be considered as a "folder" providing different functionality. You will see the use of those functions later on in the course.
+
+<center>
+![](images/packages-example.png){width=60%}
+</center>
+
+Actually, when you install R it comes with many more packages. Some are automatically loaded when you open R, while others are left in the background unopened. The functionality of the packages that are automatically loaded will be available to you immediately.
+However, to use any functionality from packages that are not loaded, you need to first load the package using the `library()` function. 
+
+<center>
+![](images/default-loaded-packages.png){width=60%}
+</center>
+
+
+To install packages that do not come with the basic R installation, you need to use the `install.libraries()` function or the "Packages" tab in the Files and Plots panel.
+
+![](images/install-load-package.png)
+
+
+![](images/install-packages.png)
 
 ## Postlude
 
