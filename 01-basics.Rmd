@@ -420,8 +420,8 @@ class(FALSE)
 If you try to perform arithmetic operations on logicals, TRUE is converted to 1 and FALSE to 0.
 
 ```{r}
-TRUE * 2
-FALSE * 2
+TRUE + 2
+FALSE + 2
 ```
 
 In general, to convert logical to numeric you can either multiply the values by 1, or use the `as.numeric()` function
@@ -531,15 +531,6 @@ mean(world_pop)
 
 Clearly, you could have done it by hand, summing all grades up and dividing the sum by 8. However, do you have the patience to do this for thousands of numbers? No, this is why we use R.
 
-We can verify that the average grade is the same as the sum of the numbers divided by the number of entries:
-
-```{r}
-sum(world_pop) / length(world_pop)
-```
-
-As you saw above, the `sum()` function takes a vector and sums up all values inside.
-
-
 To access specific entries of a vector we use square brackets and inside those we specify which entry we want. This is called _indexing._
 
 ```{r}
@@ -636,13 +627,67 @@ world_pop[idx]
 
 
 
-## A taste of functions
+## Functions
 
-Functions are pieces of code that take one or more inputs (also called arguments), do some computation on those, and return an output.
+Functions are pieces of code that take one or more inputs (also called arguments), do some computation on those, and return an output. In the code `sqrt(25)`, the function is `sqrt` and the input (or argument) is `25`.
 
-In the code `sqrt(25)`, `sqrt` is the function and `25` is the input or argument.
+We have already seen some functions: `sqrt()`, `mean()`, `class()`, and `c()`.
 
-We have already seen some functions, for example `sqrt()`, `mean()`, `class()`, and `c()`.
+Some useful functions for summarising numeric vectors include `length()` for the length of the vector, `min()` for the minimum value, `max()` for the maximum value, `range()` shows the range of data, while `mean()` and `sum()` show the mean and sum of the data respectively.
+
+```{r}
+length(world_pop)
+min(world_pop)
+max(world_pop)
+range(world_pop)
+mean(world_pop)
+```
+
+We can verify that the average grade is the same as the sum of the numbers divided by the number of entries:
+
+```{r}
+sum(world_pop) / length(world_pop)
+```
+
+As you saw above, the `sum()` function takes a numeric vector and sums up all its values.
+
+
+Until now we have only seen functions that took a single input. However, a function can take more than one input. The syntax then becomes
+
+```
+function_name(input1, input2)
+```
+
+An example of this is the `seq(A, B, C)` function which, as the name says, creates a sequence of values from A to B in steps of C.
+
+```{r}
+seq(1, 10)
+seq(1, 10, 3)
+```
+
+As you can see above, the first input tells you the "from", the second the "to", the last give you the "step". If you don't provide "step", this is 1 by default.
+
+You can also see that by switching the order of the inputs, you get a different result
+
+```{r}
+seq(10, 1)
+```
+
+**Note**. A shortcut for a sequence from A to B in steps of 1 is `A:B`
+
+```{r}
+1:10
+10:1
+```
+
+
+Hence, when a function takes multiple inputs, it is typical to provide the names of the inputs, resulting in the same output:
+
+```{r}
+seq(from = 1950, to = 2020, by = 10)
+seq(to = 2020, by = 10, from = 1950)
+```
+
 
 We can write our own function that computes the mean:
 
@@ -794,16 +839,11 @@ clinical
 
 
 
+
+
+
 ## Readings
 
 For further information, check to the following:
 
-- [Chapter 2, Stat 545](https://stat545.com/r-basics.html)
-
-I know, the website above prefers using `<-` for assignment, rather than `=`. 
-
-> Don’t be lazy and use =, although it would work, because it will just sow confusion later. Instead, utilize RStudio’s keyboard shortcut: Alt + - (the minus sign).
-
-However, as you will see during your academic career, there is no consensus on many topics, and I personally prefer the `=` sign. You will see the different people use either for assignment.
-
-
+- [Stat 545, Chapter 2](https://stat545.com/r-basics.html)

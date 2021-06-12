@@ -1,0 +1,422 @@
+---
+title: "Working with data"
+author:
+  - name: Umberto Noe
+    url: https://www.ed.ac.uk/profile/umberto-noe
+    affiliation: Department of Psychology, The University of Edinburgh
+  - name: Josiah King
+    url: https://www.ed.ac.uk/profile/josiah-pj-king
+    affiliation: Department of Psychology, The University of Edinburgh
+date: "`r Sys.Date()`"
+output: 
+  distill::distill_article:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r panelset, echo=FALSE}
+xaringanExtra::use_panelset()
+```
+
+
+
+## Adding functionality
+
+Your R installation comes pre-packed with lots of functionality. Just by opening R you are able to perform computations, create graphics (you'll see this later on), use functions, and much more.
+
+However, sometimes you may wish to use additional functionality that does not come directly with the installed software. R is a free and open-source programming language with a vast user network. This has led in turn to a myriad of user-contributed additional functionality, each bundled in different packages (also called libraries).
+
+These packages are stored in the [Comprehensive R Archive Network](https://cran.r-project.org/web/packages/available_packages_by_name.html) (CRAN) and can be installed.
+
+You only need to install a package _once_, to bring it from the web to your local computer.
+
+Then, to actually use the package in every R session, you simply need to load the package (and not install it every single time).
+
+<center>
+![](images/install-load-package.png){width=80%}
+</center>
+
+You install a package by going to the Files & Plots panel, click "Packages" in the tabs, then select Install, type the package names and click Install.
+
+<center>
+![](images/install-packages.png){width=80%}
+</center>
+
+Remember, you only need to do this once. 
+
+As we said, package are pre-shipped with your R installation. Examples are the base, stats, and graphics packages. Each of those can be considered as a "folder" providing different functionality. You will see the use of those functions later on in the course.
+
+<center>
+![](images/packages-example.png){width=60%}
+</center>
+
+Actually, when you install R it comes with many more packages. Some are automatically loaded when you open R, making their functionality immediately available to you, while others are left in the background unopened. In the picture below, the loaded packages are shown in orange, and the ones not loaded are in gray.
+
+For each new R session, in order to use the functionality from packages that are not automatically loaded, or that you have installed later, you must load the package with the function `library(package_name)` at the top of the R script.
+
+<center>
+![](images/default-loaded-packages.png){width=60%}
+</center>
+
+
+
+
+## Prelude
+
+In today's lesson you will need the `tidyverse` package. We will use this package to read data files into R. Try loading it:
+
+```
+library(tidyverse)
+```
+
+Did you get an error?
+
+If yes, you don't have the package installed. Install the package following the instructions above. Then try again running `library(tidyverse)`.
+
+If you don't get an error, amazing! It should look like this:
+
+```{r message=T}
+library(tidyverse)
+```
+
+**Important.** It is common practice to put all code loading packages at the top of the R script.
+
+There are some messages returned, but none of those are errors. In fact, in R errors start with the word "Error". If you don't read the word "Error" in the message, it's not an error.
+
+Open RStudio, create a new R script called _lesson2.R_ and save it into your r-bootcamp folder.
+
+In the previous examples we only entered data manually. However, this isn't very efficient if you are working with lots of data and it increases the chance of typing errors.
+This lesson will show you how to read into R data stored in files.
+
+
+```{r echo=F, eval=F}
+df <- tibble(
+    year = c(1950L, 1960L, 1970L, 1980L, 1990L, 2000L, 2010L, 2020L),
+    world_pop = as.numeric(c("2536431", "3034950", "3700437", "4458003", "5327231", "6143494", "6956824", "7794799"))
+)
+
+write_csv(df, 'data/UNpop.csv')
+write_tsv(df, 'data/UNpop.txt')
+writexl::write_xlsx(df, 'data/UNpop.xlsx')
+```
+
+
+Before going ahead, please download the following data files and save them into the subfolder "data" of r-bootcamp
+
+- [UNpop.csv]()
+- [UNpop.txt]()
+- [UNpop.xlsx]()
+
+
+## Data files
+
+A data file is any file storing data. The following types of data files are commonly used:
+
+- .csv (Comma Separated Values)
+- .tsv or .txt (Tab Separated Values)
+- .xlsx (Excel data file)
+
+How does each look? 
+
+<details>
+<summary>**csv files**</summary>
+![](images/unpop-csv.png){width=40%}
+</details>
+
+
+<details>
+<summary>**tsv or txt files**</summary>
+![](images/unpop-txt.png){width=40%}
+</details>
+
+
+<details>
+<summary>**Excel files**</summary>
+![](images/unpop-xlsx.png){width=40%}
+</details>
+
+
+
+## Directories
+
+Before importing the data into R we need to tell R in which folder we are working. This is because R will look for the data files in that folder only. If the files are stored somewhere else, R will not find them.
+
+This step is called _setting the working directory_. You can set the working directory, i.e. tell R in which folder you are working, by going to the RStudio menu -> Session -> Set working directory -> Choose directory -> Navigate to r-bootcamp
+
+Alternatively, you can go to the Files and Plots panel, click the Files tab, navigate to the r-bootcamp folder, click More -> Set as working directory.
+
+Within the r-bootcamp folder, you should have a subfolder "data" with the data files saved inside.
+
+
+## Reading data into R
+
+To read a CSV file into R we use the following function:
+
+```{r}
+unpop <- read_csv('data/UNpop.csv')
+unpop
+```
+
+To read a file in which the values are separated by tabs, we use the `read_tsv()` function:
+
+```{r}
+unpop_txt <- read_tsv('data/UNpop.txt')
+unpop_txt
+```
+
+
+To read Excel files, you need to load a package called `readxl`. Edit the top of your R script to have also the `library(reaxl)` command. The top of your R script should look like this:
+
+```{r}
+library(tidyverse)
+library(readxl)
+```
+
+Now, read the excel file into R:
+
+```{r}
+unpop_xlsx <- read_excel('data/UNpop.xlsx')
+unpop_xlsx
+```
+
+
+As you can see, they all produce the same data in R. Since they're all the same, let's look at the first one.
+
+```{r}
+unpop
+```
+
+The data table is stored in an object of class tibble. If you inspect the class it looks quite complicated but it has "tbl" among the values.
+
+```{r}
+class(unpop)
+```
+
+How many rows and columns are there?
+
+```{r}
+nrow(unpop)
+ncol(unpop)
+dim(unpop)
+```
+
+The data store the world population estimates for the last 8 decades. Hence, we have 2 variables (year and world_pop), and 8 rows (one for each decade).
+
+To get the names of the recorded variables you could either use `names()` or `colnames()`:
+
+```{r}
+names(unpop)
+colnames(unpop)
+```
+
+The `summary()` function produces quick summaries for the variables in the data table. However, this is just for a quick exploration, it is not appropriate copying and pasting such output for a journal publication, essay, or report. That would require better styling.
+
+```{r}
+summary(unpop)
+```
+
+
+We can create a publication quality summary table by doing for example
+
+```{r}
+stats <- unpop %>%
+  summarise(Mean = mean(world_pop), 
+            SD = sd(world_pop),
+            Min = min(world_pop),
+            Max = max(world_pop))
+stats
+```
+
+The function `%>%` is called *pipe* and it simply means "take what's on the left, then do ..."
+
+For example these are equivalent:
+
+```{r}
+round(exp(sqrt(1:10)), 2)
+
+1:10 %>%
+  sqrt() %>%
+  exp() %>%
+  round(2)
+```
+
+
+To make the tables even nicer, you can use the `gt` package.
+
+```{r}
+library(gt)
+
+gt(stats)
+```
+
+
+## Indexing data tables
+
+We can extract particular parts of a tibble (i.e. data table) as follows
+
+```{r}
+unpop[1:3, ]
+unpop[c(2, 5, 6), ]
+unpop[2, ]
+unpop[, 2]
+unpop$world_pop
+unpop$world_pop[1:3]
+unpop[1:3, 2]
+unpop[1:3, 'world_pop']
+```
+
+
+::: {.panelset}
+::: {.panel}
+#### Exercise
+
+Extract the first 3 years from the data.
+:::
+::: {.panel}
+#### Answer
+
+The following returns a tibble 
+
+```{r}
+unpop[1:3, 'year']
+```
+
+While this way returns a vector
+
+```{r}
+unpop$year[1:3]
+```
+
+:::
+:::
+
+
+## Missing values
+
+We do not have the estimates for the current year yet, and also we do not have the estimates for 1930 and 1940. Let's add rows corresponding to those years in the data table, but for the world population estimate value we will provide NA = not available.
+
+```{r}
+extra <- tibble(year = c(1930, 1940, 2021), 
+                world_pop = c(NA, NA, NA))
+extra
+
+unpop <- bind_rows(unpop, extra)
+unpop
+```
+
+Let's arrange the years in ascending order
+
+```{r}
+unpop <- arrange(unpop, year)
+unpop
+```
+
+Let's try computing the summaries again:
+
+```{r}
+unpop %>%
+  summarise(Mean = mean(world_pop), 
+            SD = sd(world_pop),
+            Min = min(world_pop),
+            Max = max(world_pop)) %>%
+  gt()
+```
+
+It's not working anymore! Why is that???
+
+R cannot sum a number with something that isn't available.
+
+```{r}
+2 + NA
+```
+
+Hence, there are 2 possible solutions:
+
+1. tell the R functions to ignore the NA values by specifying the argument `na.rm = TRUE`
+2. subset the data to only keep the rows without NAs
+
+Option 1: 
+
+```{r}
+unpop %>%
+  summarise(Mean = mean(world_pop, na.rm = TRUE), 
+            SD = sd(world_pop, na.rm = TRUE),
+            Min = min(world_pop, na.rm = TRUE),
+            Max = max(world_pop, na.rm = TRUE)) %>%
+  gt()
+```
+
+Option 2: 
+
+```{r}
+unpop_clean <- na.omit(unpop)
+unpop_clean
+
+unpop_clean %>%
+  summarise(Mean = mean(world_pop, na.rm = TRUE), 
+            SD = sd(world_pop, na.rm = TRUE),
+            Min = min(world_pop, na.rm = TRUE),
+            Max = max(world_pop, na.rm = TRUE)) %>%
+  gt()
+```
+
+
+## Graphics
+
+You may also want to display your data visually. We do that using the `ggplot` package, which is automatically loaded when you load the `tidyverse` package.
+
+The idea of a ggplot is to build a plot layer by layer. You start by specifying the axes, then add the geometries you want shown (points, lines, columns/bars), and then add labels, and theme options.
+
+
+![](images/ggplot-idea.png)
+
+<center>
+Source: [Michela Cameletti](https://bookdown.org/michela_cameletti/rcodingfordatascience)
+</center>
+
+
+```{r echo=FALSE}
+knitr::opts_chunk$set(out.width='70%', fig.align='center', fig.width=6)
+```
+
+
+```{r}
+# Specify axes only
+ggplot(unpop_clean, aes(x = year, y = world_pop))
+# Add columns
+ggplot(unpop_clean, aes(x = year, y = world_pop)) +
+  geom_col()
+# Change labels
+ggplot(unpop_clean, aes(x = year, y = world_pop / 1000)) +
+  geom_col() + 
+  labs(x = 'Year', y = 'World population estimate (in millions)')
+# Change theme
+ggplot(unpop_clean, aes(x = year, y = world_pop / 1000)) +
+  geom_col() + 
+  labs(x = 'Year', y = 'World population estimate (in millions)') +
+  theme_classic()
+```
+
+
+Alternatively, you could plot the population for each decade as a dot and join the dots with lines:
+
+```{r}
+ggplot(unpop_clean, aes(x = year, y = world_pop / 1000)) +
+  geom_point(size = 3) + 
+  geom_line() +
+  labs(x = 'Year', y = 'World population estimate (in millions)') +
+  theme_classic()
+```
+
+
+
+## Readings
+
+For further information, check to the following:
+
+- [Stat 545](https://stat545.com/graphics-overview.html)

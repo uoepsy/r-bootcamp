@@ -91,8 +91,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 
   <!--  https://schema.org/Article -->
-  <meta property="article:published" itemprop="datePublished" content="2021-06-11" />
-  <meta property="article:created" itemprop="dateCreated" content="2021-06-11" />
+  <meta property="article:published" itemprop="datePublished" content="2021-06-12" />
+  <meta property="article:created" itemprop="dateCreated" content="2021-06-12" />
   <meta name="article:author" content="Umberto Noe" />
   <meta name="article:author" content="Josiah King" />
 
@@ -109,7 +109,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["R basics"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url","affiliation"]}},"value":[{"type":"character","attributes":{},"value":["Umberto Noe"]},{"type":"character","attributes":{},"value":["https://www.ed.ac.uk/profile/umberto-noe"]},{"type":"character","attributes":{},"value":["Department of Psychology, The University of Edinburgh"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url","affiliation"]}},"value":[{"type":"character","attributes":{},"value":["Josiah King"]},{"type":"character","attributes":{},"value":["https://www.ed.ac.uk/profile/josiah-pj-king"]},{"type":"character","attributes":{},"value":["Department of Psychology, The University of Edinburgh"]}]}]},{"type":"character","attributes":{},"value":["2021-06-11"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","toc_depth","toc_float"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"integer","attributes":{},"value":[2]},{"type":"logical","attributes":{},"value":[true]}]}]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["R basics"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url","affiliation"]}},"value":[{"type":"character","attributes":{},"value":["Umberto Noe"]},{"type":"character","attributes":{},"value":["https://www.ed.ac.uk/profile/umberto-noe"]},{"type":"character","attributes":{},"value":["Department of Psychology, The University of Edinburgh"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url","affiliation"]}},"value":[{"type":"character","attributes":{},"value":["Josiah King"]},{"type":"character","attributes":{},"value":["https://www.ed.ac.uk/profile/josiah-pj-king"]},{"type":"character","attributes":{},"value":["Department of Psychology, The University of Edinburgh"]}]}]},{"type":"character","attributes":{},"value":["2021-06-12"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","toc_depth","toc_float"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"integer","attributes":{},"value":[2]},{"type":"logical","attributes":{},"value":[true]}]}]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   
@@ -1455,7 +1455,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"R basics","authors":[{"author":"Umberto Noe","authorURL":"https://www.ed.ac.uk/profile/umberto-noe","affiliation":"Department of Psychology, The University of Edinburgh","affiliationURL":"#","orcidID":""},{"author":"Josiah King","authorURL":"https://www.ed.ac.uk/profile/josiah-pj-king","affiliation":"Department of Psychology, The University of Edinburgh","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-06-11T00:00:00.000+00:00","citationText":"Noe & King, 2021"}
+{"title":"R basics","authors":[{"author":"Umberto Noe","authorURL":"https://www.ed.ac.uk/profile/umberto-noe","affiliation":"Department of Psychology, The University of Edinburgh","affiliationURL":"#","orcidID":""},{"author":"Josiah King","authorURL":"https://www.ed.ac.uk/profile/josiah-pj-king","affiliation":"Department of Psychology, The University of Edinburgh","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-06-12T00:00:00.000+00:00","citationText":"Noe & King, 2021"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -1476,7 +1476,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   
 ,   Josiah King <a href="https://www.ed.ac.uk/profile/josiah-pj-king" class="uri">https://www.ed.ac.uk/profile/josiah-pj-king</a> (Department of Psychology, The University of Edinburgh)
   
-<br />2021-06-11
+<br />2021-06-12
 </div>
 
 <div class="d-article">
@@ -1492,7 +1492,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <li><a href="#parentheses">Parentheses</a></li>
 <li><a href="#vectors">Vectors</a></li>
 <li><a href="#logical-indexing">Logical indexing</a></li>
-<li><a href="#a-taste-of-functions">A taste of functions</a></li>
+<li><a href="#functions">Functions</a></li>
 <li><a href="#factors">Factors</a></li>
 <li><a href="#readings">Readings</a></li>
 </ul>
@@ -1956,15 +1956,15 @@ On the Editor panel, click the first icon on the top-left, then select script.</
 <p>If you try to perform arithmetic operations on logicals, TRUE is converted to 1 and FALSE to 0.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class="cn">TRUE</span> <span class="op">*</span> <span class="fl">2</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="cn">TRUE</span> <span class="op">+</span> <span class="fl">2</span>
+</code></pre>
+</div>
+<pre><code>[1] 3</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class="cn">FALSE</span> <span class="op">+</span> <span class="fl">2</span>
 </code></pre>
 </div>
 <pre><code>[1] 2</code></pre>
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class="cn">FALSE</span> <span class="op">*</span> <span class="fl">2</span>
-</code></pre>
-</div>
-<pre><code>[1] 0</code></pre>
 </div>
 <p>In general, to convert logical to numeric you can either multiply the values by 1, or use the <code>as.numeric()</code> function</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -2045,12 +2045,12 @@ This section will present the simplest and <em>most inefficient</em> way of ente
 <p>A vector is an ordered listing of entries. If all entries are numbers, we have a numeric vector. If all entries are character strings, we have a character vector.</p>
 <p>The following table reports the world population estimates (in thousands) for the past few decades.</p>
 <div class="layout-chunk" data-layout="l-body">
-<div id="impddinkpl" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="ehukwkplgf" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#impddinkpl .gt_table {
+#ehukwkplgf .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -2075,7 +2075,7 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   border-left-color: #D3D3D3;
 }
 
-#impddinkpl .gt_heading {
+#ehukwkplgf .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2087,7 +2087,7 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   border-right-color: #D3D3D3;
 }
 
-#impddinkpl .gt_title {
+#ehukwkplgf .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2097,7 +2097,7 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   border-bottom-width: 0;
 }
 
-#impddinkpl .gt_subtitle {
+#ehukwkplgf .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2107,13 +2107,13 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   border-top-width: 0;
 }
 
-#impddinkpl .gt_bottom_border {
+#ehukwkplgf .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#impddinkpl .gt_col_headings {
+#ehukwkplgf .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2128,7 +2128,7 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   border-right-color: #D3D3D3;
 }
 
-#impddinkpl .gt_col_heading {
+#ehukwkplgf .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2148,7 +2148,7 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   overflow-x: hidden;
 }
 
-#impddinkpl .gt_column_spanner_outer {
+#ehukwkplgf .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2160,15 +2160,15 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   padding-right: 4px;
 }
 
-#impddinkpl .gt_column_spanner_outer:first-child {
+#ehukwkplgf .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#impddinkpl .gt_column_spanner_outer:last-child {
+#ehukwkplgf .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#impddinkpl .gt_column_spanner {
+#ehukwkplgf .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2180,7 +2180,7 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   width: 100%;
 }
 
-#impddinkpl .gt_group_heading {
+#ehukwkplgf .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2202,7 +2202,7 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   vertical-align: middle;
 }
 
-#impddinkpl .gt_empty_group_heading {
+#ehukwkplgf .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2217,15 +2217,15 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   vertical-align: middle;
 }
 
-#impddinkpl .gt_from_md > :first-child {
+#ehukwkplgf .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#impddinkpl .gt_from_md > :last-child {
+#ehukwkplgf .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#impddinkpl .gt_row {
+#ehukwkplgf .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2244,7 +2244,7 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   overflow-x: hidden;
 }
 
-#impddinkpl .gt_stub {
+#ehukwkplgf .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2256,7 +2256,7 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   padding-left: 12px;
 }
 
-#impddinkpl .gt_summary_row {
+#ehukwkplgf .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2266,7 +2266,7 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   padding-right: 5px;
 }
 
-#impddinkpl .gt_first_summary_row {
+#ehukwkplgf .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2276,7 +2276,7 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   border-top-color: #D3D3D3;
 }
 
-#impddinkpl .gt_grand_summary_row {
+#ehukwkplgf .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2286,7 +2286,7 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   padding-right: 5px;
 }
 
-#impddinkpl .gt_first_grand_summary_row {
+#ehukwkplgf .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2296,11 +2296,11 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   border-top-color: #D3D3D3;
 }
 
-#impddinkpl .gt_striped {
+#ehukwkplgf .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#impddinkpl .gt_table_body {
+#ehukwkplgf .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2309,7 +2309,7 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   border-bottom-color: #D3D3D3;
 }
 
-#impddinkpl .gt_footnotes {
+#ehukwkplgf .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2323,13 +2323,13 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   border-right-color: #D3D3D3;
 }
 
-#impddinkpl .gt_footnote {
+#ehukwkplgf .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#impddinkpl .gt_sourcenotes {
+#ehukwkplgf .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2343,41 +2343,41 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   border-right-color: #D3D3D3;
 }
 
-#impddinkpl .gt_sourcenote {
+#ehukwkplgf .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#impddinkpl .gt_left {
+#ehukwkplgf .gt_left {
   text-align: left;
 }
 
-#impddinkpl .gt_center {
+#ehukwkplgf .gt_center {
   text-align: center;
 }
 
-#impddinkpl .gt_right {
+#ehukwkplgf .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#impddinkpl .gt_font_normal {
+#ehukwkplgf .gt_font_normal {
   font-weight: normal;
 }
 
-#impddinkpl .gt_font_bold {
+#ehukwkplgf .gt_font_bold {
   font-weight: bold;
 }
 
-#impddinkpl .gt_font_italic {
+#ehukwkplgf .gt_font_italic {
   font-style: italic;
 }
 
-#impddinkpl .gt_super {
+#ehukwkplgf .gt_super {
   font-size: 65%;
 }
 
-#impddinkpl .gt_footnote_marks {
+#ehukwkplgf .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
@@ -2461,15 +2461,6 @@ This section will present the simplest and <em>most inefficient</em> way of ente
 <pre><code>[1] 4994021</code></pre>
 </div>
 <p>Clearly, you could have done it by hand, summing all grades up and dividing the sum by 8. However, do you have the patience to do this for thousands of numbers? No, this is why we use R.</p>
-<p>We can verify that the average grade is the same as the sum of the numbers divided by the number of entries:</p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">world_pop</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">world_pop</span><span class="op">)</span>
-</code></pre>
-</div>
-<pre><code>[1] 4994021</code></pre>
-</div>
-<p>As you saw above, the <code>sum()</code> function takes a vector and sums up all values inside.</p>
 <p>To access specific entries of a vector we use square brackets and inside those we specify which entry we want. This is called <em>indexing.</em></p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
@@ -2598,10 +2589,96 @@ This section will present the simplest and <em>most inefficient</em> way of ente
 </div>
 <pre><code>[1] 5327231 6143494 6956824 7794799</code></pre>
 </div>
-<h2 id="a-taste-of-functions">A taste of functions</h2>
-<p>Functions are pieces of code that take one or more inputs (also called arguments), do some computation on those, and return an output.</p>
-<p>In the code <code>sqrt(25)</code>, <code>sqrt</code> is the function and <code>25</code> is the input or argument.</p>
-<p>We have already seen some functions, for example <code>sqrt()</code>, <code>mean()</code>, <code>class()</code>, and <code>c()</code>.</p>
+<h2 id="functions">Functions</h2>
+<p>Functions are pieces of code that take one or more inputs (also called arguments), do some computation on those, and return an output. In the code <code>sqrt(25)</code>, the function is <code>sqrt</code> and the input (or argument) is <code>25</code>.</p>
+<p>We have already seen some functions: <code>sqrt()</code>, <code>mean()</code>, <code>class()</code>, and <code>c()</code>.</p>
+<p>Some useful functions for summarising numeric vectors include <code>length()</code> for the length of the vector, <code>min()</code> for the minimum value, <code>max()</code> for the maximum value, <code>range()</code> shows the range of data, while <code>mean()</code> and <code>sum()</code> show the mean and sum of the data respectively.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">world_pop</span><span class="op">)</span>
+</code></pre>
+</div>
+<pre><code>[1] 8</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">world_pop</span><span class="op">)</span>
+</code></pre>
+</div>
+<pre><code>[1] 2536431</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">world_pop</span><span class="op">)</span>
+</code></pre>
+</div>
+<pre><code>[1] 7794799</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">world_pop</span><span class="op">)</span>
+</code></pre>
+</div>
+<pre><code>[1] 2536431 7794799</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">world_pop</span><span class="op">)</span>
+</code></pre>
+</div>
+<pre><code>[1] 4994021</code></pre>
+</div>
+<p>We can verify that the average grade is the same as the sum of the numbers divided by the number of entries:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">world_pop</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">world_pop</span><span class="op">)</span>
+</code></pre>
+</div>
+<pre><code>[1] 4994021</code></pre>
+</div>
+<p>As you saw above, the <code>sum()</code> function takes a numeric vector and sums up all its values.</p>
+<p>Until now we have only seen functions that took a single input. However, a function can take more than one input. The syntax then becomes</p>
+<pre><code>function_name(input1, input2)</code></pre>
+<p>An example of this is the <code>seq(A, B, C)</code> function which, as the name says, creates a sequence of values from A to B in steps of C.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">10</span><span class="op">)</span>
+</code></pre>
+</div>
+<pre><code> [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">10</span>, <span class="fl">3</span><span class="op">)</span>
+</code></pre>
+</div>
+<pre><code>[1]  1  4  7 10</code></pre>
+</div>
+<p>As you can see above, the first input tells you the “from”, the second the “to”, the last give you the “step”. If you don’t provide “step”, this is 1 by default.</p>
+<p>You can also see that by switching the order of the inputs, you get a different result</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">1</span><span class="op">)</span>
+</code></pre>
+</div>
+<pre><code> [1] 10  9  8  7  6  5  4  3  2  1</code></pre>
+</div>
+<p><strong>Note</strong>. A shortcut for a sequence from A to B in steps of 1 is <code>A:B</code></p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>
+</code></pre>
+</div>
+<pre><code> [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class="fl">10</span><span class="op">:</span><span class="fl">1</span>
+</code></pre>
+</div>
+<pre><code> [1] 10  9  8  7  6  5  4  3  2  1</code></pre>
+</div>
+<p>Hence, when a function takes multiple inputs, it is typical to provide the names of the inputs, resulting in the same output:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span>from <span class="op">=</span> <span class="fl">1950</span>, to <span class="op">=</span> <span class="fl">2020</span>, by <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
+</code></pre>
+</div>
+<pre><code>[1] 1950 1960 1970 1980 1990 2000 2010 2020</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span>to <span class="op">=</span> <span class="fl">2020</span>, by <span class="op">=</span> <span class="fl">10</span>, from <span class="op">=</span> <span class="fl">1950</span><span class="op">)</span>
+</code></pre>
+</div>
+<pre><code>[1] 1950 1960 1970 1980 1990 2000 2010 2020</code></pre>
+</div>
 <p>We can write our own function that computes the mean:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
@@ -2769,14 +2846,9 @@ Levels: Placebo Treatment</code></pre>
 <h2 id="readings">Readings</h2>
 <p>For further information, check to the following:</p>
 <ul>
-<li><a href="https://stat545.com/r-basics.html">Chapter 2, Stat 545</a></li>
+<li><a href="https://stat545.com/r-basics.html">Stat 545, Chapter 2</a></li>
 </ul>
-<p>I know, the website above prefers using <code>&lt;-</code> for assignment, rather than <code>=</code>.</p>
-<blockquote>
-<p>Don’t be lazy and use =, although it would work, because it will just sow confusion later. Instead, utilize RStudio’s keyboard shortcut: Alt + - (the minus sign).</p>
-</blockquote>
-<p>However, as you will see during your academic career, there is no consensus on many topics, and I personally prefer the <code>=</code> sign. You will see the different people use either for assignment.</p>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
