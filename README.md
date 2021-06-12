@@ -8,7 +8,7 @@ A compact course to take you from zero to R-hero!
 
 [Lesson 1: R basics](01-basics.html)
 
-[Lesson 2: R is better than spreadsheets](02-data.html)
+[Lesson 2: Working with data](02-data.html)
 
 [Lesson 3: TODO](TODO.html)
 
