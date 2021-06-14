@@ -414,6 +414,15 @@ ggplot(unpop_clean, aes(x = year, y = world_pop / 1000)) +
 ```
 
 
+Note the key components of the ggplot code.
+
+`data =` where we provide the name of the dataframe.
+`aes =` where we provide the aesthetics. These are things which we map from the data to the graph. For instance, the x-axis, or if we wanted to colour the columns/bars according to some aspect of the data.
+Then we add (using `+`) some geometry. These are the shapes (for instance, points or lines), which will be put in the correct place according to what we specified in aes().
+
+`+ geom_….` Adds different shapes (e.g., points) to the plot.
+
+You can find great documentation on ggplot2 at https://www.statsandr.com/blog/graphics-in-r-with-ggplot2/.
 
 ## Readings
 

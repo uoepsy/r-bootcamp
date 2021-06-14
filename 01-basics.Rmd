@@ -150,7 +150,7 @@ Let's consider again this operation:
 3 * 4
 ```
 
-In the above example, [1] indicates that the output is the first element of a vector of length 1 (we will discuss vectors later in this course. 
+In the above example, [1] indicates that the output is the first element of a vector of length 1 (we will discuss vectors later in this course). 
 
 
 It is important for you to try the extra examples that follow. Remember that to successfully learn programming you need to actually type the code.
@@ -175,9 +175,15 @@ R has many other functions, and users can even create their own functions. We wi
 
 ## Objects
 
-R can store information by creating an _object_ with a name of our choice. Typically, it is recommended to use a name that makes sense for the value that is being stored.
+R can store information by creating an _object_ with a name of our choice. 
 
-Once you have create an object, you can simply refer to it by name.
+We use the _assignment operator_ `<-` to assign some value to an object:
+
+```
+name <- computation
+```
+
+Typically, it is recommended to use a name that makes sense for the value that is being stored.
 
 The name of an object must follow some rules:
 
@@ -188,12 +194,7 @@ The name of an object must follow some rules:
 - It cannot use special characters such as `$`, `%`, `+`, `-`, `*`, `/`, `^` which have a special meaning in R.
 
 The Environment panel (top-right of RStudio) will display all the objects that you have created in the current R session.
-
-We use the _assignment operator_ `<-` to assign some value to an object:
-
-```
-name <- computation
-```
+Once you have create an object, you can simply refer to it by name.
 
 To see the actual value, simply call the name of the object:
 
@@ -228,6 +229,7 @@ x
 
 
 Another thing to pay attention to is that R is case sensitive. `Hello` is not the same as either `hello` or `HELLO`. As a consequence, we receive an error in the R console when we type `X` rather than `x`, which is defined above.
+
 
 ```{r error=T}
 X
@@ -541,7 +543,7 @@ world_pop[8]  # last entry, i.e. for year 2020
 
 Multiple elements can be extracted via a vector of indices within square brackets.
 If an index is negative, the corresponding entry is removed from the vector.
-Note that none of these operations change the original vector, because we have not ovewritten the object via an assignment.
+Note that none of these operations change the original vector, because we have not overwritten the object via an assignment.
 
 ```{r}
 world_pop[c(2, 5)]
