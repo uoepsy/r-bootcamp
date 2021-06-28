@@ -1,0 +1,25 @@
+name: "R Bootcamp"
+output_dir: "docs"
+navbar:
+  title: "R Bootcamp"
+  type: default
+  left:
+    - icon: "fa-home"
+      href: index.html
+    - text: "Lessons"
+      menu:
+      - text: "Bootcamp starts here"
+        href: 00-intro.html
+      - text: "Basics"
+        href: 01-basics.html
+      - text: "Data"
+        href: 02-data.html
+      - text: "Checkpoint: Data"
+        href: cpt-data.html
+      - text: "Exploring data"
+        href: 03-exploring-data.html
+output: 
+  distill::distill_article:
+    toc: true
+    toc_depth: 2
+    toc_float: true

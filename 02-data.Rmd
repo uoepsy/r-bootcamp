@@ -1,18 +1,5 @@
 ---
 title: "Working with data"
-author:
-  - name: Umberto Noe
-    url: https://www.ed.ac.uk/profile/umberto-noe
-    affiliation: Department of Psychology, The University of Edinburgh
-  - name: Josiah King
-    url: https://www.ed.ac.uk/profile/josiah-pj-king
-    affiliation: Department of Psychology, The University of Edinburgh
-date: "`r Sys.Date()`"
-output: 
-  distill::distill_article:
-    toc: true
-    toc_depth: 2
-    toc_float: true
 ---
 
 ```{r setup, include=FALSE}
@@ -108,9 +95,9 @@ writexl::write_xlsx(df, 'data/UNpop.xlsx')
 
 Before going ahead, please download the following data files and save them into the subfolder "data" of r-bootcamp
 
-- [UNpop.csv]()
-- [UNpop.txt]()
-- [UNpop.xlsx]()
+- [UNpop.csv](data/UNpop.csv)
+- [UNpop.txt](data/UNpop.txt)
+- [UNpop.xlsx](data/UNpop.xlsx)
 
 
 ## Data files
@@ -296,6 +283,177 @@ unpop$year[1:3]
 :::
 
 
+To create a new variable, you simply use the `$` symbol with a new name
+
+```{r}
+unpop$world_pop_millions <- unpop$world_pop /  1000
+```
+
+
+## The tidyverse way
+
+There is a simpler way to work with data. The `tidyverse` package, which you can load with
+
+```{r}
+library(tidyverse)
+```
+
+Has the following functions:
+
+- `slice()` to keep only some rows
+
+- `filter()` to only keep the rows matching some condition
+
+- `select()` to only keep specific columns
+
+- `mutate()` to create new columns via a computation
+
+
+Display all data:
+
+```{r}
+unpop
+```
+
+Create a new column with the population in millions
+```{r}
+unpop %>%
+  mutate(world_pop_millions = world_pop / 1000)
+```
+
+Check if the column is still in the original data:
+
+```{r}
+unpop
+```
+
+It is not there! Why? Because we didn't overwrite the unpop variable when we created the new column:
+
+```{r}
+unpop <- unpop %>%
+  mutate(world_pop_millions = world_pop / 1000)
+```
+
+Keep first 3 rows only:
+
+```{r}
+unpop %>%
+  slice(1:3)
+```
+
+Keep only the world_pop column:
+
+```{r}
+unpop %>%
+  select(world_pop)
+```
+
+Keep only the world_pop column and the first 3 rows only:
+
+```{r}
+unpop %>%
+  select(world_pop) %>%
+  slice(1:3)
+```
+
+Let's compute the average population over that time period:
+
+```{r}
+avg_pop <- mean(unpop$world_pop)
+avg_pop
+```
+
+Keep only the rows with a world population larger than the mean:
+
+```{r}
+unpop %>%
+  filter(world_pop > avg_pop)
+```
+
+
+In all the code above, the symbol `%>%` is called __pipe__ and can be inserted with Control + Shift + M on Windows or Command + Shift + M on macOS.
+
+Its role is telling R to continue the computation. Basically it allows you to write nested expressions
+
+```
+bop(scoop(hop(foo_foo, through = forest), up = field_mice), on = head)
+```
+
+using a more human-readable form ^[Source: 
+https://github.com/hadley/r4ds/blob/master/pipes.Rmd]:
+
+```
+foo_foo %>%
+  hop(through = forest) %>%
+  scoop(up = field_mouse) %>%
+  bop(on = head)
+```
+
+The idea is that if you have some function `f()`, you can do
+
+```
+df %>%
+  f(y)
+```
+
+Which has the same meaning as:
+
+```
+f(df, y)
+```
+
+So whatever you carry forward with the pipe gets passed as the first argument of the next function.
+
+If you want to be specific, you can use a `.` inside:
+
+```{r}
+10 %>%
+  seq(., to = 20, by = 1)
+```
+
+```{r}
+10 %>%
+  seq(from = 1, to = ., by = 1)
+```
+
+
+
+## Tibbles
+
+A data table is an object which stores data. Up to now, you have only read data tables in R from files stored on your PC.
+
+You can also create it directly yourself by typing the values into a function called `tibble()`, also part of the tidyverse package.
+
+In lesson 1, we stored the world population and the years in separate numeric vectors:
+
+```{r}
+year <- seq(1950, 2020, by = 10)
+world_pop <- c(2536431, 3034950, 3700437, 4458003, 
+               5327231, 6143494, 6956824, 7794799)
+```
+
+But the first value in `world_pop` is linked to the first year, and so on. So it's better to keep the values linked together and arranged into a data table.
+
+In a tibble we write the column names, an equal sign, and the values
+
+```
+tibble(
+  column_name = values,
+  another_column_name = other_values
+)
+```
+
+
+```{r}
+tbl <- tibble(
+  year = seq(1950, 2020, by = 10),
+  world_pop = c(2536431, 3034950, 3700437, 4458003, 5327231, 6143494, 6956824, 7794799)
+)
+tbl
+```
+
+
+
 ## Missing values
 
 We do not have the estimates for the current year yet, and also we do not have the estimates for 1930 and 1940. Let's add rows corresponding to those years in the data table, but for the world population estimate value we will provide NA = not available.
@@ -358,10 +516,10 @@ unpop_clean <- na.omit(unpop)
 unpop_clean
 
 unpop_clean %>%
-  summarise(Mean = mean(world_pop, na.rm = TRUE), 
-            SD = sd(world_pop, na.rm = TRUE),
-            Min = min(world_pop, na.rm = TRUE),
-            Max = max(world_pop, na.rm = TRUE)) %>%
+  summarise(Mean = mean(world_pop), 
+            SD = sd(world_pop),
+            Min = min(world_pop),
+            Max = max(world_pop)) %>%
   gt()
 ```
 
@@ -387,16 +545,16 @@ knitr::opts_chunk$set(out.width='70%', fig.align='center', fig.width=6)
 
 ```{r}
 # Specify axes only
-ggplot(unpop_clean, aes(x = year, y = world_pop))
+ggplot(data = unpop_clean, aes(x = year, y = world_pop))
 # Add columns
-ggplot(unpop_clean, aes(x = year, y = world_pop)) +
+ggplot(data = unpop_clean, aes(x = year, y = world_pop)) +
   geom_col()
 # Change labels
-ggplot(unpop_clean, aes(x = year, y = world_pop / 1000)) +
+ggplot(data = unpop_clean, aes(x = year, y = world_pop / 1000)) +
   geom_col() + 
   labs(x = 'Year', y = 'World population estimate (in millions)')
 # Change theme
-ggplot(unpop_clean, aes(x = year, y = world_pop / 1000)) +
+ggplot(data = unpop_clean, aes(x = year, y = world_pop / 1000)) +
   geom_col() + 
   labs(x = 'Year', y = 'World population estimate (in millions)') +
   theme_classic()
@@ -406,7 +564,7 @@ ggplot(unpop_clean, aes(x = year, y = world_pop / 1000)) +
 Alternatively, you could plot the population for each decade as a dot and join the dots with lines:
 
 ```{r}
-ggplot(unpop_clean, aes(x = year, y = world_pop / 1000)) +
+ggplot(data = unpop_clean, aes(x = year, y = world_pop / 1000)) +
   geom_point(size = 3) + 
   geom_line() +
   labs(x = 'Year', y = 'World population estimate (in millions)') +
@@ -414,15 +572,18 @@ ggplot(unpop_clean, aes(x = year, y = world_pop / 1000)) +
 ```
 
 
-Note the key components of the ggplot code.
+Note the key components of a ggplot:
 
-`data =` where we provide the name of the dataframe.
-`aes =` where we provide the aesthetics. These are things which we map from the data to the graph. For instance, the x-axis, or if we wanted to colour the columns/bars according to some aspect of the data.
-Then we add (using `+`) some geometry. These are the shapes (for instance, points or lines), which will be put in the correct place according to what we specified in aes().
+- `data =` is where we provide the name of the data table
 
-`+ geom_….` Adds different shapes (e.g., points) to the plot.
+- `aes =` where we provide the aesthetics. These are things which we map from the data to the graph. For instance, the x-axis, or if we wanted to colour the columns/bars according to some aspect of the data.
+
+- Then we add (using `+`) some geometry. These are the shapes (for instance, points or lines), which will be put in the correct place according to what we specified in aes().
+
+- `+ geom_...` Adds different shapes (e.g., points) to the plot.
 
 You can find great documentation on ggplot2 at https://www.statsandr.com/blog/graphics-in-r-with-ggplot2/.
+
 
 ## Readings
 

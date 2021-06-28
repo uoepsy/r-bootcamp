@@ -1,0 +1,67 @@
+Plan
+---
+
+::: {.panelset}
+::: {.panel}
+#### Exercise
+
+:::
+::: {.panel}
+#### Answer
+
+:::
+:::
+
+
+
+---
+
+
+Lesson 0: Getting started
+
+- what is R and RStudio
+- installation
+
+
+Lesson 1: R basics
+
+- R is a calculator
+- Assignment
+- Conditions
+- Parentheses
+- Vector data
+- Data types, especially factors
+
+
+Lesson 2: R is better than spreadsheets
+
+- What are data files: CSV, TSV, Excel
+- Reading data into R: read_csv, read_tsv, read_excel
+- NAs introduction: NA + 2, mean(NA)
+- Replacing NAs
+- Indexing (keep not NAs), and generalise to other cases
+- Reordering, sorting order
+- Writing files
+
+
+Lesson 3: Exploring data
+
+- R can make plots
+- R can make means and SDs
+- Filter, select, group by
+- functions
+
+
+Lesson 4: Insights from data
+
+- Means vary from sample to sample
+- CLT, normal distribution
+- Confidence interval
+
+
+Lesson 5: Making decisions
+
+- Testing an hypothesis
+- t distribution
+- Cohen's D
+

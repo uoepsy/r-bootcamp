@@ -1,0 +1,318 @@
+---
+title: "Checkpoint: Data"
+output: 
+  distill::distill_article:
+    toc: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r panelset, echo=FALSE}
+xaringanExtra::use_panelset()
+```
+
+```{r echo=F}
+library(tidyverse)
+library(gt)
+```
+
+
+<center>
+Self-reported voting turnout, can we trust it?
+</center>
+\
+
+Consider the data stored in the file [turnout.csv](data/turnout.csv). These represent measurements on US election turnout data and will be used to investigate whether there is a bias in self-reported voting turnout. In a nutshell, people are becoming more concerned about accuracy of answers to post-election surveys as people might lie about about whether or not they voted due to social  desirability bias. Perhaps the respondent felt like they should have voted when in fact they didn't vote.
+You will investigate whether this sort of bias is present in the survey conducted by the American National Election Studies (ANES).
+
+```{r echo=F}
+df <- tibble(
+    Variable = c("year", "ANES", "VEP", "VAP", "total", "felons", "noncitizens", "overseas", "osvoters"),
+    Description = c("election year", "ANES estimated turnout rate", 
+                    "voting eligible population (in thousands)", 
+                    "voting age population (in thousands)", "
+                    total ballots cast for highest office (in thousands)", 
+                    "total ineligible felons (in thousands)", 
+                    "total noncitizens (in thousands)", 
+                    "total eligible overseas voters (in thousands)", 
+                    "total ballots counted by overseas voters (in thousands)")
+)
+
+
+gt(df) %>%
+    cols_label(
+        Variable = md('*Variable*'),
+        Description = md('*Description*')
+    )
+```
+
+
+How do we measure turnout rates? The numerator should be the total votes that were cast, while we have two choices for the denominator:
+
+1. Registered voters
+2. VAP (voting-age population) from Census
+3. VEP (voting-eligible population)
+
+Both VAP and VEP do not count overseas voters, so if those data are available we may want to use it. Furthermore, we have that 
+
+$$
+\text{VEP = VAP + overseas voters} - \text{ineligible voters}
+$$
+
+where:
+
+- overseas voters: military personnel and civilians
+- ineligible voters: non-citizens, disenfranchised felons, those who failed to
+meet states’ residency requirement, etc.
+
+
+### Q1
+
+:::{.panelset}
+:::{.panel}
+#### Exercise
+
+Read the data into R.  
+How many variables and observations are there?  
+What's the range of years covered by this survey?
+:::
+:::{.panel}
+#### Answer
+
+```{r}
+library(tidyverse)
+turnout <- read_csv('data/turnout.csv')
+head(turnout)
+```
+
+```{r}
+dim(turnout)
+```
+
+```{r}
+range(turnout$year)
+```
+
+The file stores measurements on 9 variables for 14 years. The range of years covered by the ANES survey is 1980 to 2008.
+
+:::
+:::
+
+
+### Q2
+
+::: {.panelset}
+::: {.panel}
+#### Exercise
+Adjust the voting age population (VAP) to also include overseas voters.  
+Using the adjusted VAP, calculate the turnout rate.
+Finally, calculate the turnout rate using the voting eligible population (VEP) as the denominator. What differences do you observe?
+:::
+::: {.panel}
+#### Answer
+```{r}
+turnout$ANES
+```
+
+The ANES estimated turnout rate is out of 100, so we will express rates as percentages instead of proportions.
+
+
+
+```{r}
+turnout$VAPtr <- turnout$total / (turnout$VAP + turnout$overseas) * 100
+turnout$VEPtr <- turnout$total / turnout$VEP * 100
+```
+
+```{r}
+turnout$VEPtr - turnout$VAPtr
+```
+
+```{r}
+ggplot(turnout) + 
+    geom_line(aes(year, VAPtr)) +
+    geom_point(aes(year, VAPtr)) +
+    geom_line(aes(year, VEPtr), color = 'red', linetype = 2) +
+    geom_point(aes(year, VEPtr), color = 'red', linetype = 2) +
+    labs(x = 'Year', y = 'Turnout rate (black: VAP, red: VEP)')
+```
+
+It appears that the estimated turnout rate based on the VAP is always lower than the estimate using the VEP.
+:::
+:::
+
+
+
+### Q3
+
+::: {.panelset}
+::: {.panel}
+#### Exercise
+Calculate the bias between the ANES estimate of the turnout rate and the estimate using the adjusted VAP.\
+How big is the bias on average?\
+What's the range of the bias?
+:::
+::: {.panel}
+#### Answer
+
+```{r}
+turnout$diffVAP <- turnout$ANES - turnout$VAPtr
+summary(turnout$diffVAP)
+
+turnout$diffVEP <- turnout$ANES - turnout$VEPtr
+summary(turnout$diffVEP)
+```
+
+The average bias between the VAP and the ANES estimate of the turnout rate is 20.33 with a min of 11.06 and 26.17
+
+The corresponding values for the turnout rate estimate based on the VEP is 16.84, with a range 8.58, 22.49.
+:::
+:::
+
+
+
+
+## The `%in%` function.
+
+What if we want to check whether each value in a vector is found in another collection of values?
+
+```{r}
+x <- 1:10
+x
+
+collection <- c(4, 8)
+collection
+
+x %in% collection
+```
+
+As you can see from the output above, `%in%` checks whether each value appears among the collection. If it does, it returns TRUE and, if it doesn't, FALSE.
+
+You can also use the logical TRUE/FALSE values for logical indexing.
+
+```{r}
+x[x %in% collection]
+```
+
+
+
+## Filtering rows in a dataset
+
+Let's create a data table `df` with two columns: X, containing the letters "a" and "b" each repeated 5 times, and Y containing the whole numbers from 1 to 10:
+
+```{r}
+df <- tibble(
+  X = rep(c('a', 'b', 'c', 'd'), each = 5),
+  Y = 1:20
+)
+df
+```
+
+Let's keep the rows where X is either b or d
+
+```{r}
+df[df$X %in% c('b', 'd'), ]
+```
+
+or, to avoid always writing the data name we can use the function `filter` from the library `tidyverse`, which automatically looks for the column `X` inside the data `df`:
+
+```{r}
+filter(df, X %in% c('b', 'd'))
+```
+
+or
+
+```{r}
+df %>%
+  filter(X %in% c('b', 'd'))
+```
+
+
+
+
+### Q4
+
+::: {.panelset}
+::: {.panel}
+#### Exercise
+Presidential elections occur every 4 years. Split the data into two, one for presidential and one for midterm elections.
+
+Does the bias of the ANES estimates vary across election types?
+
+:::
+::: {.panel}
+#### Answer
+
+
+```{r}
+turnout$year
+
+yrs_presid <- seq(1980, 2008, by = 4)
+yrs_presid
+
+turnout$year %in% yrs_presid
+
+presid <- filter(turnout, year %in% yrs_presid)
+presid
+
+midterm <- filter(turnout, !(year %in% yrs_presid))
+midterm
+```
+
+
+Using the VEP turnout rate:
+
+```{r}
+mean(presid$ANES - presid$VEPtr)
+mean(midterm$ANES - midterm$VEPtr)
+```
+
+Using the VAP turnout rate:
+
+```{r}
+mean(presid$ANES - presid$VAPtr)
+mean(midterm$ANES - midterm$VAPtr)
+```
+
+Using both the VEP or VAP estimates of the turnout rate, it seems that the bias is higher in the presidential elections than the midterm elections.
+
+
+
+:::
+:::
+
+
+
+### Q5
+
+:::{.panelset}
+
+:::{.panel}
+#### Exercise
+
+Divide the data into half by election years such that you subset the data into two periods.  
+Calculate the difference between the ANES turnout rate and the VEP turnout rate separately for each year within each period.  
+Has the bias of ANES increased over time?
+:::
+
+:::{.panel}
+#### Answer
+
+```{r}
+turnout
+
+first_period <- turnout[1:7, ]
+second_period <- turnout[8:14, ]
+
+mean(first_period$ANES) - mean(first_period$VEPtr)
+mean(second_period$ANES) - mean(second_period$VEPtr)
+```
+
+Yes, it appears that in the second half of the data the bias was slightly higher.
+
+:::
+:::
+
+
+

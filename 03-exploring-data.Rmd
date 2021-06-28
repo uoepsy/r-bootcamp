@@ -1,0 +1,103 @@
+---
+title: "Exploring data"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r panelset, echo=FALSE}
+xaringanExtra::use_panelset()
+```
+
+
+
+## Gapminder data
+
+In this lesson we will work with some of the data from the [Gapminder project](https://www.gapminder.org/). This data are available via an R package, which you will need to install in R.  
+First, install the `gapminder` package. Then load the `gapminder` package and the `tidyverse` package as we will need its functionality to work with data.
+
+```{r}
+library(gapminder)
+library(tidyverse)
+```
+
+The gapminder package provides you with a data table having the same name as the package (unfortunately).  
+Let's inspect the contents of the data using the glimpse function from tidyverse:
+
+```{r}
+glimpse(gapminder)
+```
+
+The output tells us that the Gapminder data contain 1704 rows and 6 columns.  
+An alternative to `glimpse()` is the `str()` function, showing the structure of the data
+
+```{r}
+str(gapminder)
+```
+
+## Handling data
+
+If you have not already done so, install the tidyverse package now. Then, load it via:
+
+```{r}
+library(tidyverse)
+```
+
+Look at the data:
+
+```{r}
+gapminder
+```
+
+Look at the head (= top 6 rows) or tail (= last 6 rows) of the data
+
+```{r}
+head(gapminder)
+tail(gapminder)
+```
+
+
+Inspect the variable names, the number of columns, the length of the data (= ncol), the dimension, and the number of rows:
+
+```{r}
+names(gapminder)
+ncol(gapminder)
+length(gapminder)
+dim(gapminder)
+nrow(gapminder)
+```
+
+
+You can get a quick statistical description of each variable with
+
+```{r}
+summary(gapminder)
+```
+
+
+## Look at some variables individually
+
+Let's start by looking at some of the year values, and then count how many times each year appears in the data using the `table()` function:
+
+```{r}
+head(gapminder$year)
+summary(gapminder$year)
+table(gapminder$year)
+```
+
+```{r}
+class(gapminder$continent)
+summary(gapminder$continent)
+levels(gapminder$continent)
+nlevels(gapminder$continent)
+```
+
+
+## Plotting
+
+```{r}
+ggplot(data = gapminder, aes(x = continent)) +
+  geom_bar()
+```
+

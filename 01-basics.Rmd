@@ -1,18 +1,5 @@
 ---
 title: "R basics"
-author:
-  - name: Umberto Noe
-    url: https://www.ed.ac.uk/profile/umberto-noe
-    affiliation: Department of Psychology, The University of Edinburgh
-  - name: Josiah King
-    url: https://www.ed.ac.uk/profile/josiah-pj-king
-    affiliation: Department of Psychology, The University of Edinburgh
-date: "`r Sys.Date()`"
-output: 
-  distill::distill_article:
-    toc: true
-    toc_depth: 2
-    toc_float: true
 ---
 
 
@@ -239,11 +226,43 @@ X
 Getting familiar with programming errors or bugs is part of learning to program. Do not panic when you get an error, it doesn't mean the PC is exploding. You can make as many errors as you want and fix them iteratively.
 
 In programming you actually learn from your errors. The tricky part is figuring out how to fix them, and you will learn this with time.
-Here, the error message tells us that the object `X` does not exist. We can see the list of existing objects in the Environment tab in the upper-right window, where we will find that the correct object is `x`. It is also possible to obtain the same list of created objects by using the `ls()` function.
+Here, the error message tells us that the object `X` does not exist. We can see the list of existing objects in the Environment tab in the upper-right window, where we will find that the correct object is `x`. 
+
+It is also possible to view the list of created objects in the console by using the list objects function `ls()`:
 
 ```{r}
 ls()
 ```
+
+
+Let's create more objects!
+
+```{r}
+obj1 <- 50
+obj2 <- 10
+obj3 <- obj1 / obj2
+obj3
+```
+
+Look at the objects created:
+
+```{r}
+ls()
+```
+
+Remove one or more object:
+
+```{r}
+rm(obj1, obj2)
+ls()
+```
+
+Or, to remove the entire list of created objects:
+
+```{r}
+rm(list = ls())
+```
+
 
 Until now we have only assigned numbers to an object, but R can also store other types of values as objects. For example, you can store a string of characters by enclosing it by double quotation marks or single quotation marks. Don't mix and match!
 
@@ -627,6 +646,75 @@ idx <- world_pop > mean_pop
 world_pop[idx]
 ```
 
+
+
+## Not avaible (i.e. missing) values
+
+R can store missing values too. These are simply not available data, or NA in short, and they are special. As you don't have the value, the result of a computation involving NA values will return NA.
+
+```{r}
+NA
+NA + 2
+10 * NA
+
+x <- c(NA, 2, 10)
+x + 5
+```
+
+
+Imagine we wanted to store the world population up to year 2030. We don't know the last value yet, so we would have
+
+```{r}
+year_new <- seq(1950, 2030, by = 10)
+year_new
+```
+
+The function `seq(from, to, by)` creates a sequence of values starting at `from`, ending at `to`, in steps specified by `by`.
+
+```{r}
+world_pop_new <- c(2536431, 3034950, 3700437, 4458003, 5327231, 6143494, 6956824, 7794799, NA)
+world_pop_new
+```
+
+
+If we want to divide the vector by 1000 to express the population in millions, rather than thousands, you will see that the last entry of the vector will stay as NA.
+
+```{r}
+world_pop_new / 1000
+```
+
+
+We can find which entries are NA using the function `is.na()`
+
+```{r}
+is.na(world_pop_new)
+```
+
+And use this vector for logical indexing. Remember the values returned are only those for which the index is TRUE:
+
+```{r}
+world_pop_new[is.na(world_pop_new)]
+```
+
+Negation, i.e. the opposite is obtained with the exclamation mark `!`, which means "not"
+
+```{r}
+world_pop_new[!is.na(world_pop_new)]
+```
+
+
+In general, the opposite of TRUE is FALSE, and vice versa:
+
+```{r}
+!FALSE
+
+x <- TRUE
+x
+!x
+
+(2 == 3)
+!(2 == 3)
+```
 
 
 ## Functions
