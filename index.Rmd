@@ -7,19 +7,18 @@ title: "Home"
 
 A compact course to take you from zero to R-hero!
 
-[Lesson 0: Getting started](00-intro.html)
+- [Lesson 0: Getting started](00-intro.html)
 
-[Lesson 1: R basics](01-basics.html)
+- [Lesson 1: R basics](01-basics.html)
 
-[Lesson 2: Working with data](02-data.html)
+- [Lesson 2: Working with data](02-data.html)  
+[Checkpoint: Working with data](cpt-data.html)
 
-[CHECKPOINT: Data](cpt-data.html)
+- [Lesson 3: Exploring data](03-exploring-data.html)
 
-[Lesson 3: Exploring data](03-exploring-data.html)
+- [Lesson 4: Insights from data](04-insights-from-data.html)
 
-[Lesson 4: Insights from data](04-insights-from-data.html)
-
-[Lesson 5: Coming soon...]()
+- [Lesson 5: Coming soon... Making decisions]()
 
 
 ---
