@@ -1,0 +1,41 @@
+---
+title: "Making decisions"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      out.width = '80%',
+                      fig.align = 'center')
+
+set.seed(5)
+
+theme_set(theme_classic(base_size = 12))
+```
+
+```{r panelset, echo=FALSE}
+xaringanExtra::use_panelset()
+```
+
+
+
+## Smiles and leniency
+
+We will investigate the following research question
+
+> Can a simple smile have an effect on punishment assigned following an infraction?
+
+Researchers [LaFrance and Hecht (1995)](https://doi.org/10.1177/0146167295213002) conducted a study to examine the effect of a smile on the leniency of disciplinary action for wrongdoers.
+Participants in the experiment took on the role of members of a college disciplinary panel judging students accused of cheating. 
+They were given, along with a description of the offence, a picture of the "suspect" who was either smiling or had a neutral facial expression. 
+A leniency score (on a 10-point scale) was calculated based on the disciplinary decisions made by the participants. 
+The full data can be found in the [Smiles.csv](data/Smiles.csv) dataset, also available at the following link: https://uoepsy.github.io/data/Smiles.csv
+
+The experimenters have prior knowledge that smiling has a positive influence on people, and they are testing to see if the average lenience score is higher for smiling students than it is for students with a neutral facial expression (or, in other words, that smiling students are given more leniency and milder punishments.)
+
+
+```{r}
+library(tidyverse)
+
+smiles <- read_csv('data/Smiles.csv')
+head(smiles)
+```

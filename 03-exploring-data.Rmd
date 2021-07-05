@@ -78,26 +78,232 @@ summary(gapminder)
 
 ## Look at some variables individually
 
-Let's start by looking at some of the year values, and then count how many times each year appears in the data using the `table()` function:
+Let's start by looking at the year variable. Clearly, we are not running the following code otherwise we will get 1704 values printed out and it will be impossible to make any sense of that!
+
+```{r  eval=F}
+# Don't run this, or you will get 1704 values printed!
+gapminder$year
+```
+
+Instead we will use `head()` to see the first few values:
 
 ```{r}
 head(gapminder$year)
+```
+
+If you wish to see more entries,
+
+```{r}
+head(gapminder$year, n = 25)
+tail(gapminder$year, n = 25)
+```
+
+Year is a numeric vector with entries being whole numbers (no decimals), in R these are also called __integers__.
+
+```{r}
+class(gapminder$year)
+```
+
+We can get a quick summary of the data with the `summary()` function:
+
+```{r}
 summary(gapminder$year)
+```
+
+
+Next, we can compute how many times each year appears in the data. This is also called a frequency table, as it shows the absolute frequency (or count) of how many times each year is present in the data:
+
+```{r}
 table(gapminder$year)
 ```
 
+Let's now focus on the continent variable:
+
 ```{r}
 class(gapminder$continent)
-summary(gapminder$continent)
+head(gapminder$continent)
+```
+
+We can see that continent is a factor object. The distinct categories it can take (= levels) and the number of levels are:
+
+
+```{r}
 levels(gapminder$continent)
 nlevels(gapminder$continent)
+```
+
+Performing a `summary()` on an object of class factor will perform a frequency table
+
+```{r}
+summary(gapminder$continent)
+```
+
+That is, the same as 
+
+```{r}
+table(gapminder$continent)
+```
+
+
+For small data tables, you can look at the data directly by typing
+
+```
+View(gapminder)
 ```
 
 
 ## Plotting
 
+We can create a barplot showing how many times each continent appears in the data
+
 ```{r}
 ggplot(data = gapminder, aes(x = continent)) +
-  geom_bar()
+    geom_bar()
 ```
 
+Let's focus on Europe:
+
+```{r}
+gapminder_eu <- gapminder %>%
+    filter(continent == 'Europe')
+
+head(gapminder_eu)
+```
+
+Average life expectancy over european countries for each year:
+
+```{r}
+gapminder_avg <- gapminder_eu %>%
+    group_by(year) %>%
+    summarise(mean_life_exp = mean(lifeExp))
+
+gapminder_avg
+```
+
+Let's show it as a plot
+
+```{r}
+ggplot(data = gapminder_avg, aes(x = year, y = mean_life_exp)) +
+    geom_point() +
+    geom_line() +
+    labs(x = 'Year', y = 'Life expectancy (EU average)')
+```
+
+What if we wanted to compare these curves across different continents?
+
+
+```{r}
+gapminder_cont <- gapminder %>%
+    group_by(continent, year) %>%
+    summarise(mean_life_exp = mean(lifeExp))
+
+gapminder_cont
+```
+
+
+```{r}
+ggplot(data = gapminder_cont, 
+       aes(x = year, y = mean_life_exp, color = continent)) +
+    geom_point() +
+    geom_line() +
+    labs(x = 'Year', y = 'Average life expectancy')
+```
+
+Wow! this plot is definitely much more informative than all that huge table of numbers you get from `View(gapminder)`. 
+
+From the plot we can see the increasing trend over time of average life expectancy in each continent, and we see that Oceania consistently had the highest average life expectancy than any other country, while Africa had the lowest.
+
+
+### Q1
+
+::: {.panelset}
+::: {.panel}
+#### Exercise
+
+Group the Gapminder data by continent and country, and compute for each the average (over the different years) life expectancy and average GDP per capita.  
+Create a plot where each country is shown as a point, the x-axis has the average GDP per capita, the y-axis the average life expectancy, and the points are coloured by continent.
+
+:::
+::: {.panel}
+#### Answer
+
+```{r}
+gapminder_le_gdp <- gapminder %>%
+    group_by(continent, country) %>%
+    summarise(mean_le = mean(lifeExp),
+              mean_gdp = mean(gdpPercap))
+
+gapminder_le_gdp
+```
+
+```{r}
+ggplot(data = gapminder_le_gdp,
+       aes(x = mean_gdp, y = mean_le, color = continent)) +
+    geom_point() +
+    labs(x = 'Average GDP per capita', y = 'Average life expectancy')
+```
+
+To make it easier to read, we can change the x-axis to increase in powers of 10.
+
+```{r}
+ggplot(data = gapminder_le_gdp,
+       aes(x = mean_gdp, y = mean_le, color = continent)) +
+    geom_point() +
+    scale_x_log10() +
+    labs(x = 'Average GDP per capita', y = 'Average life expectancy')
+```
+
+
+:::
+:::
+
+
+### Q2
+
+::: {.panelset}
+::: {.panel}
+#### Exercise
+
+Create a new column called `pop_m`, storing the population in millions.  
+Store the result in a new tibble called `gapminder_new`.
+:::
+::: {.panel}
+#### Answer
+
+```{r}
+gapminder_new <- gapminder %>%
+    mutate(pop_m = pop / 1000000)
+
+gapminder_new
+```
+
+:::
+:::
+
+
+### Q3
+
+::: {.panelset}
+::: {.panel}
+#### Exercise
+
+Consider now only the countries in the Americas.
+Plot the average GDP per capita as a function of year.
+:::
+::: {.panel}
+#### Answer
+```{r}
+gapminder_am <- gapminder %>%
+    filter(continent == 'Americas') %>%
+    group_by(year) %>%
+    summarise(mean_gdp = mean(gdpPercap))
+gapminder_am
+
+ggplot(data = gapminder_am, 
+           aes(x = year, y = mean_gdp)) +
+    geom_point() +
+    geom_line()
+```
+
+:::
+:::

@@ -1,9 +1,11 @@
 ---
-title: Home
+title: "Home"
 ---
 
-A compact course to take you from zero to R-hero!
 
+### Plan
+
+A compact course to take you from zero to R-hero!
 
 [Lesson 0: Getting started](00-intro.html)
 
@@ -11,13 +13,13 @@ A compact course to take you from zero to R-hero!
 
 [Lesson 2: Working with data](02-data.html)
 
-[Checkpoint: Data](cpt-data.html)
+[CHECKPOINT: Data](cpt-data.html)
 
-[Lesson 3: TODO](TODO.html)
+[Lesson 3: Exploring data](03-exploring-data.html)
 
-[Lesson 4: TODO](TODO.html)
+[Lesson 4: Insights from data](04-insights-from-data.html)
 
-[Lesson 5: TODO](TODO.html)
+[Lesson 5: Coming soon...]()
 
 
 ---
@@ -36,9 +38,7 @@ A good way to keep up to date is to regularly check the following websites:
 
 Also remember to update R from time to time, and also to check for RStudio updates.
 
-Good luck and best wishes in your career,
-
-Umberto and Josiah
+Good luck and best wishes in your career!
 
 ---
 

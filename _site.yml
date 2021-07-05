@@ -1,23 +1,29 @@
-name: "R Bootcamp"
+name: "r-bootcamp"
+title: "R Bootcamp"
+theme: theme.css
 output_dir: "docs"
 navbar:
-  title: "R Bootcamp"
   type: default
   left:
     - icon: "fa-home"
       href: index.html
+  right:
     - text: "Lessons"
       menu:
-      - text: "Bootcamp starts here"
+      - text: "Getting started"
         href: 00-intro.html
-      - text: "Basics"
+      - text: "R basics"
         href: 01-basics.html
-      - text: "Data"
+      - text: "Working with data"
         href: 02-data.html
-      - text: "Checkpoint: Data"
+      - text: "Checkpoint: data"
         href: cpt-data.html
       - text: "Exploring data"
         href: 03-exploring-data.html
+      - text: "Insights from data"
+        href: 04-insights-from-data.html
+      - text: "Coming soon... Making decisions"
+        #href: 05-making-decisions.html
 output: 
   distill::distill_article:
     toc: true

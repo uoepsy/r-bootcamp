@@ -176,6 +176,10 @@ Click the section that applies to your specific PC to expand it.
 
 ## RStudio
 
+```{r, layout="l-body", out.width='40%'}
+knitr::include_graphics('https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/RStudio_logo_flat.svg/2880px-RStudio_logo_flat.svg.png')
+```
+
 ### What is RStudio?
 
 RStudio is a nicer interface to R. It is simply a wrapper around R that combines the R _Console_, a text editor, a file explorer, a help panel, and a graphics panel to see all your pictures.

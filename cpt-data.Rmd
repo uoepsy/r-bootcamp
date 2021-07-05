@@ -19,10 +19,10 @@ library(gt)
 ```
 
 
-<center>
-Self-reported voting turnout, can we trust it?
-</center>
-\
+> **Key question**
+> 
+> Can we trust self-reported voting turnout?
+
 
 Consider the data stored in the file [turnout.csv](data/turnout.csv). These represent measurements on US election turnout data and will be used to investigate whether there is a bias in self-reported voting turnout. In a nutshell, people are becoming more concerned about accuracy of answers to post-election surveys as people might lie about about whether or not they voted due to social  desirability bias. Perhaps the respondent felt like they should have voted when in fact they didn't vote.
 You will investigate whether this sort of bias is present in the survey conducted by the American National Election Studies (ANES).

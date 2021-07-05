@@ -1,0 +1,51 @@
+﻿Row,Job Title,Hourly (H) or Salaried (S),Seniority (yr),Round Terminated (6 = retained),Age (yr)
+1,Engineering Clerk,H,1.5,6,25
+2,Engineering Tech II,H,12.4,6,38
+3,Engineering Tech II,H,25.5,6,56
+4,Secretary to Engin Manag,H,24.3,6,48
+5,Engineering Tech II,H,16.3,1,53
+6,Engineering Tech II,H,30.8,1,55
+7,Engineering Tech II,H,27.9,1,59
+8,Parts Crib Attendant,H,1.2,1,22
+9,Engineering Tech II,H,13.8,2,55
+10,Engineering Tech II,H,39.1,2,64
+11,Technical Secretary,H,17.2,2,55
+12,Engineering Tech II,H,28.8,3,55
+13,Engineering Tech II,H,14.2,4,33
+14,Engineering Tech II,H,13.7,4,35
+15,Customer Serv Engineer,S,24.3,6,61
+16,Customer Serv Engr Assoc,S,2.7,6,29
+17,Design Engineer,S,23.3,6,48
+18,Design Engineer,S,16.6,6,54
+19,Design Engineer,S,12.9,6,55
+20,Design Engineer,S,23.8,6,60
+21,Engineering Assistant,S,4.5,6,31
+22,Engineering Associate,S,5.8,6,34
+23,Engineering Manager,S,27.2,6,59
+24,Machine Designer,S,0.8,6,32
+25,Packaging Engineer,S,7.2,6,53
+26,Prod Spec-Printing,S,16.2,6,47
+27,Proj Engineer-Elec,S,19.8,6,48
+28,Project Engineer,S,17.3,6,42
+29,Project Engineer,S,26.8,6,48
+30,Project Engineer,S,9.4,6,57
+31,Supv Engineering Serv,S,18.6,6,37
+32,Supv Machine Shop,S,26.8,6,54
+33,Chemist,S,36.8,1,69
+34,Design Engineer,S,3.1,1,53
+35,Engineering Associate,S,5.3,1,30
+36,Machine Designer,S,5.8,1,52
+37,Machine Parts Cont-Supv,S,37.4,1,63
+38,Prod Specialist,S,47.2,1,64
+39,Project Engineer,S,31.3,1,66
+40,Chemist,S,38.2,2,61
+41,Design Engineer,S,1.7,2,31
+42,Electrical Engineer,S,4.8,2,42
+43,Machine Designer,S,22.1,2,56
+44,Machine Parts Cont Coor,S,23.2,2,54
+45,VH Prod Specialist,S,35.3,2,56
+46,Printing Coordinator,S,29,3,50
+47,Prod Dev Engineer,S,5.2,3,32
+48,Prod Specialist,S,36,4,59
+49,VH Prod Specialist,S,28.8,4,49
+50,Engineering Associate,S,1.7,5,23
