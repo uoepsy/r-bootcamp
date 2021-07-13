@@ -2706,7 +2706,8 @@ In other words, it tells us how reliable those means are as estimates of the unk
 standard error
 </aside>
 <p><span class="math display">\[
-SE(sample\ mean) = \frac{SD(original\ sample)}{\sqrt{sample\ size}}
+SE(\text{sample mean}) = 
+\frac{SD(\text{original sample})}{\sqrt{\text{sample size}}}
 \]</span></p>
 <p>In this case, the original sample is the collected data <code>btdata</code>. The SE of the mean is computed as follows:</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -2730,7 +2731,7 @@ SE(sample\ mean) = \frac{SD(original\ sample)}{\sqrt{sample\ size}}
 <pre><code>[1] 0.0601292</code></pre>
 </div>
 <p><span class="math display">\[
-SE(mean) = \frac{0.4251776}{\sqrt{50}} = 0.0601292
+SE(\text{mean}) = \frac{0.4251776}{\sqrt{50}} = 0.0601292
 \]</span></p>
 <p>You can confirm that it is approximately equal to the standard deviation of the 1000 generated sample means. The two numbers for the SE will become closer and closer as the number of resamples increases (from 1,000 to 10,000 or 100,000 for example):</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -2752,25 +2753,22 @@ Note that the standard deviation of the original data is 0.43, while the standar
 <p><img src="04-insights-from-data_files/figure-html5/unnamed-chunk-13-1.png" width="80%" style="display: block; margin: auto;" /></p>
 </div>
 <p>How can we use this distribution to test whether the unknown mean body temperature for the entire population of healthy individuals is 37 °C?</p>
-<p>The answer lies in comparing the distance between the sample mean and the hypothesised population value to the variability of the sample means due to random sampling.<br />
-This is called the <em>t statistic</em> and is computed using:</p>
+<p>The answer lies in comparing the difference between the (observed) sample mean and the hypothesised population value to the variability of the sample means due to random sampling.<br />
+This is called the <em>t statistic</em> and is computed as:</p>
 <aside>
 t-statistic
 </aside>
-<ul>
-<li><p>sample mean: the mean of the original sample;</p></li>
-<li><p>hypothesised value: the hypothesised value for the population parameter in the null hypothesis <span class="math inline">\(H_0\)</span>;</p></li>
-<li><p>SE(sample mean): the standard error. This is the SD of the sampling distribution of the mean. <strong>Careful!</strong> This is NOT the SD of the original sample!</p></li>
-</ul>
-<p>The formula of the t-statistic is:</p>
 <p><span class="math display">\[
 \begin{aligned}
 t 
 &amp;= \frac{\text{pattern}}{\text{noise}} \\
-&amp;= \frac{\text{difference between observed and hypothesised value of the mean}}{\text{chance variation due to sampling}} \\
-&amp;= \frac{\text{sample mean} - \text{hypothesised value}}{SE(\text{sample mean})}
+&amp;= \frac{\text{observed - hypothesised mean}}{\text{chance variation due to sampling}} \\
+&amp;= \frac{\text{sample mean} - \text{hypothesised mean}}{SE(\text{sample mean})}
 \end{aligned}
 \]</span></p>
+<p>In the formula above, the pattern is the difference between the sample (observed) mean and the hypothesised value in the null hypothesis.</p>
+<p>The chance variation due to sampling is quantified by the standard error of the mean. The standard error (SE) is the standard deviation of the sampling distribution of the mean.<br />
+<strong>Careful!</strong> This is NOT the SD of the original sample!</p>
 <p>We typically decide that there is “something of interest going on” in the data that is worth reporting to the public if the t statistic is very far from 0, i.e. very large or very negative.<br />
 In those cases, <strong>the pattern is larger than the noise due to random sampling alone</strong>, and we say there is evidence against the null hypothesis and in favour of the alternative hypothesis.</p>
 <p>On the other hand, if the t statistic is not big enough and fairly close to 0, the denominator in the fraction will be larger than the numerator, meaning that the noise (= natural chance variation due to random sampling) explained most of the variation in the data. In this case we say that there is not sufficient evidence against the null hypothesis and hence we do not reject it. That is, we maintain / fail to reject the status quo.</p>
