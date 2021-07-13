@@ -10,22 +10,25 @@ navbar:
   right:
     - text: "Lessons"
       menu:
-      - text: "0: Getting started"
+      - text: "L0: Getting started"
         href: 00-getting-started.html
-      - text: "1: R basics"
+      - text: '---'
+      - text: "L1: R basics"
         href: 01-basics.html
-      - text: "2: Working with data"
+      - text: '---'
+      - text: "L2: Working with data"
         href: 02-data.html
-      - text: "3: Exploring data"
-        href: 03-exploring-data.html
-      - text: "4: Insights from data"
-        href: 04-insights-from-data.html
-      - text: "5: Coming soon... Making decisions"
-        #href: 05-making-decisions.html
-    - text: "Checkpoints"
-      menu:
-      - text: "2: Working with data"
+      - text: "C2: Checkpoint"
         href: cpt-data.html
+      - text: '---'
+      - text: "L3: Exploring data"
+        href: 03-exploring-data.html
+      - text: '---'
+      - text: "L4: Insights from data"
+        href: 04-insights-from-data.html
+      - text: '---'
+      - text: "L5: Making decisions"
+        href: 05-making-decisions.html
 output: 
   distill::distill_article:
     toc: true

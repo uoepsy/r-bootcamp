@@ -5,20 +5,15 @@ title: "Home"
 
 ### Plan
 
-A compact course to take you from zero to R-hero!
+A compact course to take you from zero to R-hero! The list of self-paced lessons is as follows, with a couple of checkpoints along the way. There is not a checkpoint for each lesson, so make sure to type along the code you see, do not simply read it and think "oh I understand it, hence I can surely do it without guidance."
 
 - [Lesson 0: Getting started](00-intro.html)
-
 - [Lesson 1: R basics](01-basics.html)
-
 - [Lesson 2: Working with data](02-data.html)  
-[Checkpoint: Working with data](cpt-data.html)
-
+[Checkpoint](cpt-data.html)
 - [Lesson 3: Exploring data](03-exploring-data.html)
-
 - [Lesson 4: Insights from data](04-insights-from-data.html)
-
-- [Lesson 5: Coming soon... Making decisions]()
+- [Lesson 5: Making decisions](05-making-decisions.html)
 
 
 ---

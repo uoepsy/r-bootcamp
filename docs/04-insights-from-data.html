@@ -2373,8 +2373,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   }</style>
   <!--/radix_placeholder_distill-->
   <script src="site_libs/header-attrs-2.9/header-attrs.js"></script>
-  <link href="site_libs/panelset-0.2.4/panelset.css" rel="stylesheet" />
-  <script src="site_libs/panelset-0.2.4/panelset.js"></script>
+  <link href="site_libs/panelset-0.2.6/panelset.css" rel="stylesheet" />
+  <script src="site_libs/panelset-0.2.6/panelset.js"></script>
   <script src="site_libs/popper-2.6.0/popper.min.js"></script>
   <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
   <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
@@ -2415,22 +2415,18 @@ Lessons
 <span class="down-arrow">&#x25BE;</span>
 </button>
 <div class="nav-dropdown-content">
-<a href="00-getting-started.html">0: Getting started</a>
-<a href="01-basics.html">1: R basics</a>
-<a href="02-data.html">2: Working with data</a>
-<a href="03-exploring-data.html">3: Exploring data</a>
-<a href="04-insights-from-data.html">4: Insights from data</a>
-<span class="nav-dropdown-header">5: Coming soon... Making decisions</span>
-</div>
-</div>
-<div class="nav-dropdown">
-<button class="nav-dropbtn">
-Checkpoints
- 
-<span class="down-arrow">&#x25BE;</span>
-</button>
-<div class="nav-dropdown-content">
-<a href="cpt-data.html">2: Working with data</a>
+<a href="00-getting-started.html">L0: Getting started</a>
+<hr/>
+<a href="01-basics.html">L1: R basics</a>
+<hr/>
+<a href="02-data.html">L2: Working with data</a>
+<a href="cpt-data.html">C2: Checkpoint</a>
+<hr/>
+<a href="03-exploring-data.html">L3: Exploring data</a>
+<hr/>
+<a href="04-insights-from-data.html">L4: Insights from data</a>
+<hr/>
+<a href="05-making-decisions.html">L5: Making decisions</a>
 </div>
 </div>
 <a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
@@ -2476,7 +2472,7 @@ Checkpoints
 </blockquote>
 <p>You might think that the average body temperature for healthy humans is about 37 °C. This is what most people would say and it kind of has been given for granted for many years.<br />
 However, could it be possible that the average body temperature for healthy humans has changed over time? Perhaps this could be due to the climate change?<br />
-We will use data<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> comprising measurements on body temperature and pulse rate for a sample of <span class="math inline">\(n = 50\)</span> healthy subjects. The data are available <a href="data/BodyTemp.csv">here</a> and also at the following address: <a href="https://uoepsy.github.io/data/BodyTemp.csv" class="uri">https://uoepsy.github.io/data/BodyTemp.csv</a></p>
+We will use data<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> comprising measurements on body temperature and pulse rate for a random sample of <span class="math inline">\(n = 50\)</span> healthy subjects. The data are available <a href="data/BodyTemp.csv">here</a> and also at the following address: <a href="https://uoepsy.github.io/data/BodyTemp.csv" class="uri">https://uoepsy.github.io/data/BodyTemp.csv</a></p>
 <h2 id="hypotheses">Hypotheses</h2>
 <p>The first step is to translate the research question into hypothesis. This can be tricky sometimes and it involves understanding the research question.</p>
 <p>The mean for an entire population is commonly denoted with the Greek symbol <span class="math inline">\(\mu\)</span> (pronounced mu). In loose terms we want to test whether the mean body temperature for all healthy humans is 37 °C or if it has changed in either direction (i.e. it is higher or lower).</p>
@@ -2582,16 +2578,16 @@ statistical inference
 <pre><code># A tibble: 50 x 2
    BodyTemp Pulse
       &lt;dbl&gt; &lt;dbl&gt;
- 1     36.5    77
- 2     36.8    73
- 3     37.2    81
- 4     36.4    74
- 5     37.2    75
- 6     36.7    67
- 7     36.7    73
- 8     37.1    78
- 9     36.1    74
-10     36.8    69
+ 1     37.4    77
+ 2     37.1    64
+ 3     36.9    70
+ 4     36.9    82
+ 5     36.9    83
+ 6     36.5    77
+ 7     36.8    73
+ 8     37.2    81
+ 9     36.4    74
+10     37.2    75
 # … with 40 more rows</code></pre>
 </div>
 <p>Next, compute the mean:</p>
@@ -2645,7 +2641,7 @@ statistical inference
 # A tibble: 1 x 1
       M
   &lt;dbl&gt;
-1  36.9
+1  36.8
 
 [[6]]
 # A tibble: 1 x 1
@@ -2667,7 +2663,7 @@ statistical inference
 2  36.9
 3  36.8
 4  36.7
-5  36.9
+5  36.8
 6  36.8</code></pre>
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span><span class='op'>(</span><span class='va'>many_means</span><span class='op'>)</span>
@@ -2694,16 +2690,25 @@ The distribution of a variable tells us what values it takes and how often it ta
 sampling distribution
 </aside>
 <p>As you can see, most of the sample means you would obtain from samples of size 50 people would be within 36.7 and 36.9 °C. Only a couple of sample means appear to be around 37 °C.</p>
-<p>Many years ago, the statistician William Sealy Gosset while working as the chief experimental brewer for the Guinness Brewery in Dublin, found a mathematical curve that fits the distribution of the sample mean shown in the histogram above. This is called a t distribution and depends on a number called the <strong>degrees of freedom</strong> (df) which is simply the sample size minus one. It is written <span class="math inline">\(t(n-1)\)</span> and in this case as the sample has size <span class="math inline">\(n = 50\)</span>, it is <span class="math inline">\(t(49)\)</span>:</p>
+<p>Many years ago, the statistician William Sealy Gosset — while working as the chief experimental brewer for the Guinness Brewery in Dublin — found a mathematical curve that fits the distribution of the sample mean shown in the histogram above. This is called a <em>t distribution</em> and depends on a number called the <em>degrees of freedom</em> (df) which is simply the sample size minus one: <span class="math inline">\(n - 1\)</span>.<br />
+The t distribution with <span class="math inline">\(n-1\)</span> df is written <span class="math inline">\(t(n - 1)\)</span> and in this case as the sample has size <span class="math inline">\(n = 50\)</span>, it is <span class="math inline">\(t(49)\)</span>:</p>
+<aside>
+t distribution<br />
+degrees of freedom
+</aside>
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="04-insights-from-data_files/figure-html5/unnamed-chunk-10-1.png" width="80%" style="display: block; margin: auto;" /></p>
 </div>
-<p>As you can see above, the distribution of the sample mean follows a t distribution (the red curve above). You don’t need to learn the mathematical formula of the red curve, as R can compute it for you (more later on).</p>
-<p>The width of the distribution is the standard deviation of the sample mean. It has a special name however, <strong>standard error</strong>, as it tells us how variable the sample means are from sample to sample. In other words, it tells us how reliable those means are as estimates of the unknown population mean. The smaller the variation (the narrows the distribution), the better.</p>
+<p>As you can see above, the distribution of the sample mean follows a t distribution (the red curve above). You don’t need to learn the mathematical formula of the red curve, as R can compute it for you (more on this later).</p>
+<p>The width of the distribution is the standard deviation of the sample mean. It has a special name however: <em>standard error</em> of the sample mean, as it tells us how variable the sample means are from sample to sample.<br />
+In other words, it tells us how reliable those means are as estimates of the unknown population mean. The smaller the variation (the narrows the distribution), the better.</p>
+<aside>
+standard error
+</aside>
 <p><span class="math display">\[
 SE(sample\ mean) = \frac{SD(original\ sample)}{\sqrt{sample\ size}}
 \]</span></p>
-<p>In this case:</p>
+<p>In this case, the original sample is the collected data <code>btdata</code>. The SE of the mean is computed as follows:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>SD</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/sd.html'>sd</a></span><span class='op'>(</span><span class='va'>btdata</span><span class='op'>$</span><span class='va'>BodyTemp</span><span class='op'>)</span> <span class='co'># same as btstats$SD</span>
@@ -2727,47 +2732,48 @@ SE(sample\ mean) = \frac{SD(original\ sample)}{\sqrt{sample\ size}}
 <p><span class="math display">\[
 SE(mean) = \frac{0.4251776}{\sqrt{50}} = 0.0601292
 \]</span></p>
-<p>You can confirm that it is approximately equal to the standard deviation of the 1000 generated sample means. They will become closer and closer as the number of resamples increases (from 1000 to 10,000 or 100,000 for example):</p>
+<p>You can confirm that it is approximately equal to the standard deviation of the 1000 generated sample means. The two numbers for the SE will become closer and closer as the number of resamples increases (from 1,000 to 10,000 or 100,000 for example):</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/stats/sd.html'>sd</a></span><span class='op'>(</span><span class='va'>many_means</span><span class='op'>$</span><span class='va'>M</span><span class='op'>)</span>
 </code></pre>
 </div>
-<pre><code>[1] 0.05900083</code></pre>
+<pre><code>[1] 0.05977689</code></pre>
 </div>
-<p>They are pretty close to me!<br />
-Hence, the sample mean is 36.81 °C, with a standard error of 0.06 °C.</p>
+<p>They seen pretty close to me!</p>
+<p>To sum up, the sample mean is 36.81 °C, with a standard error of 0.06 °C.</p>
 <blockquote>
 <p><strong>Think about it</strong><br />
 Note that the standard deviation of the original data is 0.43, while the standard deviation of the means is 0.06. That is, the sample means will always be less variable than the original data. This is good! We don’t want our best estimates to vary too much if we had collected a slightly different sample in the first place.</p>
 </blockquote>
 <h2 id="t-test-for-a-mean">T-test for a mean</h2>
-<p>Recall the distribution of the sample means:</p>
+<p>Recall the sampling distribution of the mean:</p>
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="04-insights-from-data_files/figure-html5/unnamed-chunk-13-1.png" width="80%" style="display: block; margin: auto;" /></p>
 </div>
-<p>How can we use this distribution to test whether the unknown mean body temperature for the entire population of healthy individuals is 37 °C?<br />
-The answer lies in comparing the distance between the sample mean and the hypothesised population value to the variability of the sample means due to random sampling.<br />
-This is called the <em>t-statistic</em> and is computed using:</p>
+<p>How can we use this distribution to test whether the unknown mean body temperature for the entire population of healthy individuals is 37 °C?</p>
+<p>The answer lies in comparing the distance between the sample mean and the hypothesised population value to the variability of the sample means due to random sampling.<br />
+This is called the <em>t statistic</em> and is computed using:</p>
 <aside>
 t-statistic
 </aside>
 <ul>
-<li><p>sample mean: the mean of the original sample.</p></li>
-<li><p>hypothesised value: the hypothesised value for the population parameter in the null hypothesis <span class="math inline">\(H_0\)</span>.</p></li>
-<li><p>SE(sample mean): the standard error. This is the SD of the sampling distribution of the mean. <strong>Careful:</strong> NOT the SD of the original sample!</p></li>
+<li><p>sample mean: the mean of the original sample;</p></li>
+<li><p>hypothesised value: the hypothesised value for the population parameter in the null hypothesis <span class="math inline">\(H_0\)</span>;</p></li>
+<li><p>SE(sample mean): the standard error. This is the SD of the sampling distribution of the mean. <strong>Careful!</strong> This is NOT the SD of the original sample!</p></li>
 </ul>
 <p>The formula of the t-statistic is:</p>
 <p><span class="math display">\[
 \begin{aligned}
 t 
 &amp;= \frac{\text{pattern}}{\text{noise}} \\
-&amp;= \frac{\text{distance of sample to hypothesis}}{\text{noise}} \\
+&amp;= \frac{\text{difference between observed and hypothesised value of the mean}}{\text{chance variation due to sampling}} \\
 &amp;= \frac{\text{sample mean} - \text{hypothesised value}}{SE(\text{sample mean})}
 \end{aligned}
 \]</span></p>
-<p>We typically decide that there is something going on in the data if the t-statistic is very far from 0; i.e. very large or very negative. In those cases, <strong>the pattern is larger than the noise due to random sampling alone</strong>, and we say there is evidence against the null hypothesis and in favour of the alternative hypothesis.</p>
-<p>If the t-statistic is not big enough, i.e. it is closer to 0, then we say that there is not sufficient evidence against the null hypothesis and hence we do not reject it. That is, we maintain / fail to reject the status quo.</p>
+<p>We typically decide that there is “something of interest going on” in the data that is worth reporting to the public if the t statistic is very far from 0, i.e. very large or very negative.<br />
+In those cases, <strong>the pattern is larger than the noise due to random sampling alone</strong>, and we say there is evidence against the null hypothesis and in favour of the alternative hypothesis.</p>
+<p>On the other hand, if the t statistic is not big enough and fairly close to 0, the denominator in the fraction will be larger than the numerator, meaning that the noise (= natural chance variation due to random sampling) explained most of the variation in the data. In this case we say that there is not sufficient evidence against the null hypothesis and hence we do not reject it. That is, we maintain / fail to reject the status quo.</p>
 <blockquote>
 <p><strong>Careful!</strong><br />
 Not finding sufficient evidence against the null hypothesis is NOT the same as finding evidence FOR the null hypothesis. You simply might not have enough data to assess whether the alternative hypothesis might be the correct one. So, because of not having enough data, you cannot distinguish which one of <span class="math inline">\(H_0\)</span> or <span class="math inline">\(H_1\)</span> is true. The test is inconclusive. Hence, the community agrees to use a conservative approach and maintain the null hypothesis.</p>
@@ -2897,13 +2903,15 @@ confidence interval
 <pre><code>95 percent confidence interval:
  36.69028 36.93195</code></pre>
 <p>We are 95% confident that the mean body temperature for all healthy humans is between 36.69 °C and 36.93 °C.</p>
-<blockquote>
-<p><strong>CIs and hypothesis tests</strong><br />
+<details>
+<summary>
+<strong>CIs and hypothesis tests</strong>
+</summary>
 There is a deep link between confidence intervals and hypothesis tests. A confidence interval gives the range of plausible values that an unknown parameter of interest can take. A test of hypotheses checks whether an hypothesised value for the population parameter is plausible in light of the collected sample data.<br />
 If your hypothesised value in <span class="math inline">\(H_0\)</span> lies inside the 95% confidence interval, then it is a plausible value for the population parameter and an hypothesis test at the 5% significance level will fail to reject the null.<br />
 If your hypothesised value in <span class="math inline">\(H_0\)</span> falls outside the 95% confidence interval, then it is not a plausible value for the population parameter and an hypothesis test at the 5% significance level will reject the null.<br />
-However, a CI does not tell you anything about the <em>strength of evidence</em> against the null hypothesis that the sample data bring. This is quantified by the p-value, provided by a test of hypotheses. Simply saying the hypothesised value is outside of the CI, it doesn’t tell you <em>how far</em> from the boundary it is. The furthest, the stronger the evidence, and this is why we also report p-values.</p>
-</blockquote>
+However, a CI does not tell you anything about the <em>strength of evidence</em> against the null hypothesis that the sample data bring. This is quantified by the p-value, provided by a test of hypotheses. Simply saying the hypothesised value is outside of the CI, it doesn’t tell you <em>how far</em> from the boundary it is. The furthest, the stronger the evidence, and this is why we also report p-values.
+</details>
 <h2 id="effect-size-cohens-d">Effect size: Cohen’s D</h2>
 <p>Sometimes you may obtain a significant result, and think: “wow, amazing, I have made an impressive discovery!”</p>
 <p>Hang on, it’s not that simple. Statistical significance does not guarantee practical significance or importance. These are two distinct concepts which should be understood. A common misunderstanding is thinking that significant has the same meaning as important. In science this is not the same!</p>
@@ -2962,15 +2970,22 @@ Does the fact that the true mean body temperature for all healthy humans in the 
 <p>In this case we are in the presence of a small effect, reinforcing that even if the results were statistical significance, i.e. unlikely to be due to random sampling variation alone, they are not of practical importance due to the very samll difference between the observed and hypothesised values.</p>
 <h2 id="validity-conditions-of-the-t-test">Validity conditions of the t-test</h2>
 <p>The conditions to satisfy for the CIs and p-values from the t-test to be trustworthy are as follows:</p>
-<p>Either:</p>
-<ul>
-<li>The original sample follows a normal distribution. This is a distribution similar to the t, and you do this test with the <code>shairo.test()</code> function in R:</li>
-</ul>
-<p>Or:</p>
-<ul>
-<li>The sample size should be greater than 30 and no strong outliers present in the data.</li>
-</ul>
-<p>Let’s check the first one:</p>
+<ol type="1">
+<li><p>Data should be a simple random sample from population of interest</p></li>
+<li><p>Either one of 2a or 2b holds:<br />
+<br> 2a) The original sample follows a normal distribution. (This is a distribution similar to the t, and you do this test with the <code>shapiro.test()</code> function in R.)<br />
+<br> Or:<br />
+<br> 2b) You should have at least 30 observations in the sample, and the distribution of the data should not have strong outliers or be strongly skewed.</p></li>
+</ol>
+<blockquote>
+<p><em>Note.</em><br />
+It’s important to keep in mind that the above conditions are rough guidelines and not a guarantee.</p>
+</blockquote>
+<p>Let’s check each in turn:</p>
+<ol type="1">
+<li><p>The problem description says the data were collected on a random sample of 50 healthy subjects.</p></li>
+<li><p>Let’s start by checking 2a:</p></li>
+</ol>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/stats/shapiro.test.html'>shapiro.test</a></span><span class='op'>(</span><span class='va'>btdata</span><span class='op'>$</span><span class='va'>BodyTemp</span><span class='op'>)</span>
@@ -2983,11 +2998,7 @@ data:  btdata$BodyTemp
 W = 0.97322, p-value = 0.3115</code></pre>
 </div>
 <p>The p-value is 0.31, which is larger than the chosen significance level of 5%, hence we do not reject the null hypothesis that the sample came from a normal distribution. The conditions for the validity of the t-test results are met.</p>
-<p>If we checked the second, we would also have seen that it holds, but it is sufficient to check one of the two.</p>
-<details>
-<summary>
-The other check
-</summary>
+<p>We could then stop here. However, since this is to show you how to do everything, you would check 2b as follows:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span><span class='op'>(</span><span class='va'>btdata</span><span class='op'>)</span>
@@ -3000,40 +3011,12 @@ The other check
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>ggplot</span><span class='op'>(</span><span class='va'>btdata</span>, <span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>BodyTemp</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
     <span class='fu'>geom_histogram</span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>'white'</span><span class='op'>)</span> <span class='op'>+</span>
-     <span class='fu'>geom_boxplot</span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>'blue'</span><span class='op'>)</span>
+     <span class='fu'>geom_boxplot</span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>'darkorange'</span><span class='op'>)</span>
 </code></pre>
 </div>
 <p><img src="04-insights-from-data_files/figure-html5/unnamed-chunk-21-1.png" width="80%" style="display: block; margin: auto;" /></p>
 </div>
 <p>The distribution of the data is roughly simmetric, with no strong outliers. The boxplot highlights one data point as an outlier, but the gap could easily be due to the sample size.</p>
-</details>
-<!-- ```{r} -->
-<!-- S = replicate( -->
-<!--     1000,  -->
-<!--     iris %>%  -->
-<!--         filter(Species == 'setosa') %>% -->
-<!--         sample_n(size = 50, replace = T) %>%  -->
-<!--         pull(Petal.Length) %>%  -->
-<!--         mean -->
-<!-- ) -->
-<!-- qplot(x = S, geom = 'histogram', color = I('white')) + -->
-<!--     labs(x = 'Sample mean') -->
-<!-- ``` -->
-<!-- ```{r} -->
-<!-- hist(S, col = 'lightblue1', border = 'lightblue3',  -->
-<!--      main = '', xlab = 'Sample mean') -->
-<!-- plot(density(S)) -->
-<!-- abline(v = quantile(S, c(0.025, 0.975)), col = 'red', lwd = 2) -->
-<!-- ``` -->
-<!-- ```{r} -->
-<!-- ggplot(sldep, aes(x = Treatment, y = PDI)) +  -->
-<!--     geom_boxplot() + -->
-<!--     theme_minimal(base_size = 12) -->
-<!-- ggplot(sldep, aes(x = Treatment, y = PDI)) +  -->
-<!--     geom_violin() + -->
-<!--     stat_summary(fun = mean) + -->
-<!--     theme_minimal(base_size = 12) -->
-<!-- ``` -->
 <div class="sourceCode" id="cb25"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <section class="footnotes" role="doc-endnotes">
 <hr />

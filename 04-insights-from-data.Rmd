@@ -28,7 +28,7 @@ xaringanExtra::use_panelset()
 
 You might think that the average body temperature for healthy humans is about 37 °C. This is what most people would say and it kind of has been given for granted for many years.  
 However, could it be possible that the average body temperature for healthy humans has changed over time? Perhaps this could be due to the climate change?  
-We will use data^[Shoemaker, A. L. (1996). _What’s Normal: Temperature, Gender and Heartrate. Journal of Statistics Education, 4_(2), 4.] comprising measurements on body temperature and pulse rate for a sample of $n = 50$ healthy subjects. The data are available [here](data/BodyTemp.csv) and also at the following address: https://uoepsy.github.io/data/BodyTemp.csv
+We will use data^[Shoemaker, A. L. (1996). _What’s Normal: Temperature, Gender and Heartrate. Journal of Statistics Education, 4_(2), 4.] comprising measurements on body temperature and pulse rate for a random sample of $n = 50$ healthy subjects. The data are available [here](data/BodyTemp.csv) and also at the following address: https://uoepsy.github.io/data/BodyTemp.csv
 
 
 ## Hypotheses
@@ -179,8 +179,13 @@ sampling distribution
 
 As you can see, most of the sample means you would obtain from samples of size 50 people would be within 36.7 and 36.9 °C. Only a couple of sample means appear to be around 37 °C.
 
-Many years ago, the statistician William Sealy Gosset while working as the chief experimental brewer for the Guinness Brewery in Dublin, found a mathematical curve that fits the distribution of the sample mean shown in the histogram above. This is called a t distribution and depends on a number called the __degrees of freedom__ (df) which is simply the sample size minus one.
-It is written $t(n-1)$ and in this case as the sample has size $n = 50$, it is $t(49)$:
+Many years ago, the statistician William Sealy Gosset --- while working as the chief experimental brewer for the Guinness Brewery in Dublin --- found a mathematical curve that fits the distribution of the sample mean shown in the histogram above. This is called a _t distribution_ and depends on a number called the _degrees of freedom_ (df) which is simply the sample size minus one: $n - 1$.  
+The t distribution with $n-1$ df is written $t(n - 1)$ and in this case as the sample has size $n = 50$, it is $t(49)$:
+
+<aside>
+t distribution  
+degrees of freedom
+</aside>
 
 ```{r echo=F}
 many_means %>%
@@ -188,21 +193,27 @@ many_means %>%
 ggplot(.) +
     geom_histogram(aes(x = tstat, y = ..density..), color = 'white') +
     labs(x = 'Sample mean') +
-    geom_function(fun = ~ dt(., df = nrow(btdata) - 1), color = 'red', size = 1) +
-    annotate(geom = 'label', x = 3, y = 0.1, label = 't(49) distribution',
+    geom_function(fun = ~ dt(., df = nrow(btdata) - 1), color = 'red', 
+                  size = 1.5) +
+    annotate(geom = 'text', x = 3, y = 0.1, label = 't(49) distribution',
              color = 'red', size = 5) + 
     theme_void()
 ```
 
-As you can see above, the distribution of the sample mean follows a t distribution (the red curve above). You don’t need to learn the mathematical formula of the red curve, as R can compute it for you (more later on).
+As you can see above, the distribution of the sample mean follows a t distribution (the red curve above). You don’t need to learn the mathematical formula of the red curve, as R can compute it for you (more on this later).
 
-The width of the distribution is the standard deviation of the sample mean. It has a special name however, __standard error__, as it tells us how variable the sample means are from sample to sample. In other words, it tells us how reliable those means are as estimates of the unknown population mean. The smaller the variation (the narrows the distribution), the better.
+The width of the distribution is the standard deviation of the sample mean. It has a special name however: _standard error_ of the sample mean, as it tells us how variable the sample means are from sample to sample.  
+In other words, it tells us how reliable those means are as estimates of the unknown population mean. The smaller the variation (the narrows the distribution), the better.
+
+<aside>
+standard error
+</aside>
 
 $$
 SE(sample\ mean) = \frac{SD(original\ sample)}{\sqrt{sample\ size}}
 $$
 
-In this case:
+In this case, the original sample is the collected data `btdata`. The SE of the mean is computed as follows:
 
 ```{r}
 SD <- sd(btdata$BodyTemp) # same as btstats$SD
@@ -219,15 +230,15 @@ $$
 SE(mean) = \frac{`r round(btstats$SD, 7)`}{\sqrt{50}} = 0.0601292
 $$
 
-You can confirm that it is approximately equal to the standard deviation of the 1000 generated sample means. They will become closer
-and closer as the number of resamples increases (from 1000 to 10,000 or 100,000 for example):
+You can confirm that it is approximately equal to the standard deviation of the 1000 generated sample means. The two numbers for the SE will become closer and closer as the number of resamples increases (from 1,000 to 10,000 or 100,000 for example):
 
 ```{r}
 sd(many_means$M)
 ```
 
-They are pretty close to me!  
-Hence, the sample mean is `r round(btstats$M, 2)` °C, with a standard error of 0.06 °C.
+They seen pretty close to me!
+
+To sum up, the sample mean is `r round(btstats$M, 2)` °C, with a standard error of 0.06 °C.
 
 
 > __Think about it__  
@@ -237,7 +248,7 @@ Hence, the sample mean is `r round(btstats$M, 2)` °C, with a standard error of 
 
 ## T-test for a mean
 
-Recall the distribution of the sample means:
+Recall the sampling distribution of the mean:
 
 ```{r echo=F}
 many_means %>%
@@ -245,26 +256,28 @@ many_means %>%
 ggplot(.) +
     geom_histogram(aes(x = tstat, y = ..density..), color = 'white') +
     labs(x = 'Sample mean') +
-    geom_function(fun = ~ dt(., df = nrow(btdata) - 1), color = 'red', size = 1) +
-    annotate(geom = 'label', x = 3, y = 0.1, label = 't(49) distribution',
+    geom_function(fun = ~ dt(., df = nrow(btdata) - 1), color = 'red', 
+                  size = 1.5) +
+    annotate(geom = 'text', x = 3, y = 0.1, label = 't(49) distribution',
              color = 'red', size = 5) + 
     theme_void()
 ```
 
 How can we use this distribution to test whether the unknown mean body temperature for the entire population of healthy individuals is 37 °C?  
+
 The answer lies in comparing the distance between the sample mean and the hypothesised population value to the variability of the sample means due to random sampling.  
-This is called the _t-statistic_ and is computed using:
+This is called the _t statistic_ and is computed using:
 
 <aside>
 t-statistic
 </aside>
 
-- sample mean: the mean of the original sample.
+- sample mean: the mean of the original sample;
 
-- hypothesised value: the hypothesised value for the population parameter in the null hypothesis $H_0$.
+- hypothesised value: the hypothesised value for the population parameter in the null hypothesis $H_0$;
 
 - SE(sample mean): the standard error.
-This is the SD of the sampling distribution of the mean.  __Careful:__ NOT the SD of the original sample!
+This is the SD of the sampling distribution of the mean.  __Careful!__ This is NOT the SD of the original sample!
 
 The formula of the t-statistic is:
 
@@ -272,14 +285,15 @@ $$
 \begin{aligned}
 t 
 &= \frac{\text{pattern}}{\text{noise}} \\
-&= \frac{\text{distance of sample to hypothesis}}{\text{noise}} \\
+&= \frac{\text{difference between observed and hypothesised value of the mean}}{\text{chance variation due to sampling}} \\
 &= \frac{\text{sample mean} - \text{hypothesised value}}{SE(\text{sample mean})}
 \end{aligned}
 $$
 
-We typically decide that there is something going on in the data if the t-statistic is very far from 0; i.e. very large or very negative.  In those cases, __the pattern is larger than the noise due to random sampling alone__, and we say there is evidence against the null hypothesis and in favour of the alternative hypothesis.
+We typically decide that there is "something of interest going on" in the data that is worth reporting to the public if the t statistic is very far from 0, i.e. very large or very negative.  
+In those cases, __the pattern is larger than the noise due to random sampling alone__, and we say there is evidence against the null hypothesis and in favour of the alternative hypothesis.  
 
-If the t-statistic is not big enough, i.e. it is closer to 0, then we say that there is not sufficient evidence against the null hypothesis and hence we do not reject it. That is, we maintain / fail to reject the status quo.
+On the other hand, if the t statistic is not big enough and fairly close to 0, the denominator in the fraction will be larger than the numerator, meaning that the noise (= natural chance variation due to random sampling) explained most of the variation in the data. In this case we say that there is not sufficient evidence against the null hypothesis and hence we do not reject it. That is, we maintain / fail to reject the status quo.
 
 > __Careful!__  
 > Not finding sufficient evidence against the null hypothesis is NOT the same as finding evidence FOR the null hypothesis. You simply might not have enough data to assess whether the alternative hypothesis might be the correct one. So, because of not having enough data, you cannot distinguish which one of $H_0$ or $H_1$ is true. The test is inconclusive. Hence, the community agrees to use a conservative approach and maintain the null hypothesis.
@@ -445,12 +459,13 @@ Recall the output from the `t.test()` function:
 We are 95% confident that the mean body temperature for all healthy humans is between 36.69 °C and 36.93 °C.
 
 
-> **CIs and hypothesis tests**  
-> There is a deep link between confidence intervals and hypothesis tests. A confidence interval gives the range of plausible values that an unknown parameter of interest can take. A test of hypotheses checks whether an hypothesised value for the population parameter is plausible in light of the collected sample data.  
-> If your hypothesised value in $H_0$ lies inside the 95% confidence interval, then it is a plausible value for the population parameter and an hypothesis test at the 5% significance level will fail to reject the null.  
-> If your hypothesised value in $H_0$ falls outside the 95% confidence interval, then it is not a plausible value for the population parameter and an hypothesis test at the 5% significance level will reject the null.  
-> However, a CI does not tell you anything about the _strength of evidence_ against the null hypothesis that the sample data bring. This is quantified by the p-value, provided by a test of hypotheses. Simply saying the hypothesised value is outside of the CI, it doesn't tell you _how far_ from the boundary it is. The furthest, the stronger the evidence, and this is why we also report p-values.
-
+<details>
+<summary>**CIs and hypothesis tests**</summary>
+There is a deep link between confidence intervals and hypothesis tests. A confidence interval gives the range of plausible values that an unknown parameter of interest can take. A test of hypotheses checks whether an hypothesised value for the population parameter is plausible in light of the collected sample data.  
+If your hypothesised value in $H_0$ lies inside the 95% confidence interval, then it is a plausible value for the population parameter and an hypothesis test at the 5% significance level will fail to reject the null.  
+If your hypothesised value in $H_0$ falls outside the 95% confidence interval, then it is not a plausible value for the population parameter and an hypothesis test at the 5% significance level will reject the null.  
+However, a CI does not tell you anything about the _strength of evidence_ against the null hypothesis that the sample data bring. This is quantified by the p-value, provided by a test of hypotheses. Simply saying the hypothesised value is outside of the CI, it doesn't tell you _how far_ from the boundary it is. The furthest, the stronger the evidence, and this is why we also report p-values.
+</details>
 
 
 
@@ -510,17 +525,26 @@ In this case we are in the presence of a small effect, reinforcing that even if 
 
 The conditions to satisfy for the CIs and p-values from the t-test to be trustworthy are as follows:
 
-Either:
+1. Data should be a simple random sample from population of interest
 
-- The original sample follows a normal distribution. This is a distribution similar to the t, and you do this test with the `shairo.test()` function in R:
+2. Either one of 2a or 2b holds:  
+<br>
+2a) The original sample follows a normal distribution. (This is a distribution similar to the t, and you do this test with the `shapiro.test()` function in R.)  
+<br>
+Or:  
+<br>
+2b) You should have at least 30 observations in the sample, and the distribution of the data should not have strong outliers or be strongly skewed.
 
-Or:
 
-- The sample size should be greater than 30 and no strong outliers present in the data.
+> _Note._  
+> It’s important to keep in mind that the above conditions are rough guidelines and not a guarantee.
 
 
+Let's check each in turn:
 
-Let's check the first one:
+1. The problem description says the data were collected on a random sample of 50 healthy subjects.
+
+2. Let's start by checking 2a:
 
 ```{r}
 shapiro.test(btdata$BodyTemp)
@@ -528,12 +552,9 @@ shapiro.test(btdata$BodyTemp)
 
 The p-value is 0.31, which is larger than the chosen significance level of 5%, hence we do not reject the null hypothesis that the sample came from a normal distribution. The conditions for the validity of the t-test results are met.
 
+We could then stop here. However, since this is to show you how to do everything, you would check 2b as follows:
 
 
-If we checked the second, we would also have seen that it holds, but it is sufficient to check one of the two.
-
-<details>
-<summary>The other check</summary>
 ```{r}
 dim(btdata)
 ```
@@ -543,42 +564,8 @@ The sample size is 50, which is larger than 30.
 ```{r}
 ggplot(btdata, aes(x = BodyTemp)) +
     geom_histogram(color = 'white') +
-     geom_boxplot(color = 'blue')
+     geom_boxplot(color = 'darkorange')
 ```
 
 The distribution of the data is roughly simmetric, with no strong outliers. The boxplot highlights one data point as an outlier, but the gap could easily be due to the sample size.
-
-</details>
-
-<!-- ```{r} -->
-<!-- S = replicate( -->
-<!--     1000,  -->
-<!--     iris %>%  -->
-<!--         filter(Species == 'setosa') %>% -->
-<!--         sample_n(size = 50, replace = T) %>%  -->
-<!--         pull(Petal.Length) %>%  -->
-<!--         mean -->
-<!-- ) -->
-
-<!-- qplot(x = S, geom = 'histogram', color = I('white')) + -->
-<!--     labs(x = 'Sample mean') -->
-<!-- ``` -->
-
-<!-- ```{r} -->
-<!-- hist(S, col = 'lightblue1', border = 'lightblue3',  -->
-<!--      main = '', xlab = 'Sample mean') -->
-<!-- plot(density(S)) -->
-<!-- abline(v = quantile(S, c(0.025, 0.975)), col = 'red', lwd = 2) -->
-<!-- ``` -->
-
-<!-- ```{r} -->
-<!-- ggplot(sldep, aes(x = Treatment, y = PDI)) +  -->
-<!--     geom_boxplot() + -->
-<!--     theme_minimal(base_size = 12) -->
-
-<!-- ggplot(sldep, aes(x = Treatment, y = PDI)) +  -->
-<!--     geom_violin() + -->
-<!--     stat_summary(fun = mean) + -->
-<!--     theme_minimal(base_size = 12) -->
-<!-- ``` -->
 

@@ -2373,8 +2373,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   }</style>
   <!--/radix_placeholder_distill-->
   <script src="site_libs/header-attrs-2.9/header-attrs.js"></script>
-  <link href="site_libs/panelset-0.2.4/panelset.css" rel="stylesheet" />
-  <script src="site_libs/panelset-0.2.4/panelset.js"></script>
+  <link href="site_libs/panelset-0.2.6/panelset.css" rel="stylesheet" />
+  <script src="site_libs/panelset-0.2.6/panelset.js"></script>
   <script src="site_libs/popper-2.6.0/popper.min.js"></script>
   <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
   <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
@@ -2415,22 +2415,18 @@ Lessons
 <span class="down-arrow">&#x25BE;</span>
 </button>
 <div class="nav-dropdown-content">
-<a href="00-getting-started.html">0: Getting started</a>
-<a href="01-basics.html">1: R basics</a>
-<a href="02-data.html">2: Working with data</a>
-<a href="03-exploring-data.html">3: Exploring data</a>
-<a href="04-insights-from-data.html">4: Insights from data</a>
-<span class="nav-dropdown-header">5: Coming soon... Making decisions</span>
-</div>
-</div>
-<div class="nav-dropdown">
-<button class="nav-dropbtn">
-Checkpoints
- 
-<span class="down-arrow">&#x25BE;</span>
-</button>
-<div class="nav-dropdown-content">
-<a href="cpt-data.html">2: Working with data</a>
+<a href="00-getting-started.html">L0: Getting started</a>
+<hr/>
+<a href="01-basics.html">L1: R basics</a>
+<hr/>
+<a href="02-data.html">L2: Working with data</a>
+<a href="cpt-data.html">C2: Checkpoint</a>
+<hr/>
+<a href="03-exploring-data.html">L3: Exploring data</a>
+<hr/>
+<a href="04-insights-from-data.html">L4: Insights from data</a>
+<hr/>
+<a href="05-making-decisions.html">L5: Making decisions</a>
 </div>
 </div>
 <a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
@@ -3052,12 +3048,12 @@ This section will present the simplest and <em>most inefficient</em> way of ente
 <p>A vector is an ordered listing of entries. If all entries are numbers, we have a numeric vector. If all entries are character strings, we have a character vector.</p>
 <p>The following table reports the world population estimates (in thousands) for the past few decades.</p>
 <div class="layout-chunk" data-layout="l-body">
-<div id="lwrldxdxra" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="jitxghnhrf" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#lwrldxdxra .gt_table {
+#jitxghnhrf .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -3082,7 +3078,7 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   border-left-color: #D3D3D3;
 }
 
-#lwrldxdxra .gt_heading {
+#jitxghnhrf .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3094,7 +3090,7 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   border-right-color: #D3D3D3;
 }
 
-#lwrldxdxra .gt_title {
+#jitxghnhrf .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3104,7 +3100,7 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   border-bottom-width: 0;
 }
 
-#lwrldxdxra .gt_subtitle {
+#jitxghnhrf .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3114,13 +3110,13 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   border-top-width: 0;
 }
 
-#lwrldxdxra .gt_bottom_border {
+#jitxghnhrf .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#lwrldxdxra .gt_col_headings {
+#jitxghnhrf .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3135,7 +3131,7 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   border-right-color: #D3D3D3;
 }
 
-#lwrldxdxra .gt_col_heading {
+#jitxghnhrf .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3155,7 +3151,7 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   overflow-x: hidden;
 }
 
-#lwrldxdxra .gt_column_spanner_outer {
+#jitxghnhrf .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3167,15 +3163,15 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   padding-right: 4px;
 }
 
-#lwrldxdxra .gt_column_spanner_outer:first-child {
+#jitxghnhrf .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#lwrldxdxra .gt_column_spanner_outer:last-child {
+#jitxghnhrf .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#lwrldxdxra .gt_column_spanner {
+#jitxghnhrf .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3187,7 +3183,7 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   width: 100%;
 }
 
-#lwrldxdxra .gt_group_heading {
+#jitxghnhrf .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3209,7 +3205,7 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   vertical-align: middle;
 }
 
-#lwrldxdxra .gt_empty_group_heading {
+#jitxghnhrf .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3224,15 +3220,15 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   vertical-align: middle;
 }
 
-#lwrldxdxra .gt_from_md > :first-child {
+#jitxghnhrf .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#lwrldxdxra .gt_from_md > :last-child {
+#jitxghnhrf .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#lwrldxdxra .gt_row {
+#jitxghnhrf .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3251,7 +3247,7 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   overflow-x: hidden;
 }
 
-#lwrldxdxra .gt_stub {
+#jitxghnhrf .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3263,7 +3259,7 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   padding-left: 12px;
 }
 
-#lwrldxdxra .gt_summary_row {
+#jitxghnhrf .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3273,7 +3269,7 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   padding-right: 5px;
 }
 
-#lwrldxdxra .gt_first_summary_row {
+#jitxghnhrf .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3283,7 +3279,7 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   border-top-color: #D3D3D3;
 }
 
-#lwrldxdxra .gt_grand_summary_row {
+#jitxghnhrf .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3293,7 +3289,7 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   padding-right: 5px;
 }
 
-#lwrldxdxra .gt_first_grand_summary_row {
+#jitxghnhrf .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3303,11 +3299,11 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   border-top-color: #D3D3D3;
 }
 
-#lwrldxdxra .gt_striped {
+#jitxghnhrf .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#lwrldxdxra .gt_table_body {
+#jitxghnhrf .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3316,7 +3312,7 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   border-bottom-color: #D3D3D3;
 }
 
-#lwrldxdxra .gt_footnotes {
+#jitxghnhrf .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3330,13 +3326,13 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   border-right-color: #D3D3D3;
 }
 
-#lwrldxdxra .gt_footnote {
+#jitxghnhrf .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#lwrldxdxra .gt_sourcenotes {
+#jitxghnhrf .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3350,41 +3346,41 @@ This section will present the simplest and <em>most inefficient</em> way of ente
   border-right-color: #D3D3D3;
 }
 
-#lwrldxdxra .gt_sourcenote {
+#jitxghnhrf .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#lwrldxdxra .gt_left {
+#jitxghnhrf .gt_left {
   text-align: left;
 }
 
-#lwrldxdxra .gt_center {
+#jitxghnhrf .gt_center {
   text-align: center;
 }
 
-#lwrldxdxra .gt_right {
+#jitxghnhrf .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#lwrldxdxra .gt_font_normal {
+#jitxghnhrf .gt_font_normal {
   font-weight: normal;
 }
 
-#lwrldxdxra .gt_font_bold {
+#jitxghnhrf .gt_font_bold {
   font-weight: bold;
 }
 
-#lwrldxdxra .gt_font_italic {
+#jitxghnhrf .gt_font_italic {
   font-style: italic;
 }
 
-#lwrldxdxra .gt_super {
+#jitxghnhrf .gt_super {
   font-size: 65%;
 }
 
-#lwrldxdxra .gt_footnote_marks {
+#jitxghnhrf .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;

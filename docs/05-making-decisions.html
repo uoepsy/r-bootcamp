@@ -2373,8 +2373,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   }</style>
   <!--/radix_placeholder_distill-->
   <script src="site_libs/header-attrs-2.9/header-attrs.js"></script>
-  <link href="site_libs/panelset-0.2.4/panelset.css" rel="stylesheet" />
-  <script src="site_libs/panelset-0.2.4/panelset.js"></script>
+  <link href="site_libs/panelset-0.2.6/panelset.css" rel="stylesheet" />
+  <script src="site_libs/panelset-0.2.6/panelset.js"></script>
   <script src="site_libs/popper-2.6.0/popper.min.js"></script>
   <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
   <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
@@ -2415,22 +2415,18 @@ Lessons
 <span class="down-arrow">&#x25BE;</span>
 </button>
 <div class="nav-dropdown-content">
-<a href="00-getting-started.html">0: Getting started</a>
-<a href="01-basics.html">1: R basics</a>
-<a href="02-data.html">2: Working with data</a>
-<a href="03-exploring-data.html">3: Exploring data</a>
-<a href="04-insights-from-data.html">4: Insights from data</a>
-<span class="nav-dropdown-header">5: Coming soon... Making decisions</span>
-</div>
-</div>
-<div class="nav-dropdown">
-<button class="nav-dropbtn">
-Checkpoints
- 
-<span class="down-arrow">&#x25BE;</span>
-</button>
-<div class="nav-dropdown-content">
-<a href="cpt-data.html">2: Working with data</a>
+<a href="00-getting-started.html">L0: Getting started</a>
+<hr/>
+<a href="01-basics.html">L1: R basics</a>
+<hr/>
+<a href="02-data.html">L2: Working with data</a>
+<a href="cpt-data.html">C2: Checkpoint</a>
+<hr/>
+<a href="03-exploring-data.html">L3: Exploring data</a>
+<hr/>
+<a href="04-insights-from-data.html">L4: Insights from data</a>
+<hr/>
+<a href="05-making-decisions.html">L5: Making decisions</a>
 </div>
 </div>
 <a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
@@ -2454,25 +2450,35 @@ Checkpoints
 <nav class="l-text toc figcaption" id="TOC">
 <h3>Contents</h3>
 <ul>
-<li><a href="#smiles-and-leniency">Smiles and leniency</a></li>
+<li><a href="#investigation-smiles-and-leniency">Investigation: Smiles and leniency</a></li>
+<li><a href="#data-reading">Data reading</a></li>
+<li><a href="#data-visualisation">Data visualisation</a></li>
+<li><a href="#data-summary">Data summary</a></li>
+<li><a href="#null-and-alternative-hypothesis">Null and alternative hypothesis</a></li>
+<li><a href="#two-sample-t-test">Two-sample t test</a></li>
+<li><a href="#understanding-the-output">Understanding the output</a></li>
+<li><a href="#reporting-the-results">Reporting the results</a></li>
+<li><a href="#validity-conditions-of-the-t-test">Validity conditions of the t-test</a></li>
 </ul>
 </nav>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 
 </div>
-<h2 id="smiles-and-leniency">Smiles and leniency</h2>
-<p>We will investigate the following research question</p>
+<h2 id="investigation-smiles-and-leniency">Investigation: Smiles and leniency</h2>
 <blockquote>
+<p><strong>Research question</strong></p>
 <p>Can a simple smile have an effect on punishment assigned following an infraction?</p>
 </blockquote>
 <p>Researchers <a href="https://doi.org/10.1177/0146167295213002">LaFrance and Hecht (1995)</a> conducted a study to examine the effect of a smile on the leniency of disciplinary action for wrongdoers. Participants in the experiment took on the role of members of a college disciplinary panel judging students accused of cheating. They were given, along with a description of the offence, a picture of the “suspect” who was either smiling or had a neutral facial expression. A leniency score (on a 10-point scale) was calculated based on the disciplinary decisions made by the participants. The full data can be found in the <a href="data/Smiles.csv">Smiles.csv</a> dataset, also available at the following link: <a href="https://uoepsy.github.io/data/Smiles.csv" class="uri">https://uoepsy.github.io/data/Smiles.csv</a></p>
 <p>The experimenters have prior knowledge that smiling has a positive influence on people, and they are testing to see if the average lenience score is higher for smiling students than it is for students with a neutral facial expression (or, in other words, that smiling students are given more leniency and milder punishments.)</p>
+<h2 id="data-reading">Data reading</h2>
+<p>First, let’s read the data into R, and create an object storing the data called “smiles”:</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span>
 
-<span class='va'>smiles</span> <span class='op'>&lt;-</span> <span class='fu'>read_csv</span><span class='op'>(</span><span class='st'>'data/Smiles.csv'</span><span class='op'>)</span>
+<span class='va'>smiles</span> <span class='op'>&lt;-</span> <span class='fu'>read_csv</span><span class='op'>(</span><span class='st'>'https://uoepsy.github.io/data/Smiles.csv'</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>smiles</span><span class='op'>)</span>
 </code></pre>
 </div>
@@ -2485,8 +2491,635 @@ Checkpoints
 4      4.5 smile
 5      3.5 smile
 6      4   smile</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/dim.html'>dim</a></span><span class='op'>(</span><span class='va'>smiles</span><span class='op'>)</span>
+</code></pre>
 </div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<pre><code>[1] 68  2</code></pre>
+</div>
+<p>The data includes measurements on two variables (group and leniency) on 68 participants.</p>
+<h2 id="data-visualisation">Data visualisation</h2>
+<p>Next, let’s create a graph that compares the distributions of leniency scores between smiling and non-smiling participants:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://patchwork.data-imaginist.com'>patchwork</a></span><span class='op'>)</span> <span class='co'># to combine multiple ggplots into a single figure</span>
+
+<span class='va'>plt1</span> <span class='op'>&lt;-</span> <span class='fu'>ggplot</span><span class='op'>(</span><span class='va'>smiles</span>, <span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>Leniency</span>, color <span class='op'>=</span> <span class='va'>Group</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> 
+    <span class='fu'>geom_density</span><span class='op'>(</span><span class='op'>)</span>
+
+<span class='va'>plt2</span> <span class='op'>&lt;-</span> <span class='fu'>ggplot</span><span class='op'>(</span><span class='va'>smiles</span>, <span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>Group</span>, y <span class='op'>=</span> <span class='va'>Leniency</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> 
+    <span class='fu'>geom_boxplot</span><span class='op'>(</span><span class='op'>)</span>
+
+<span class='va'>plt1</span> <span class='op'>|</span> <span class='va'>plt2</span>
+</code></pre>
+</div>
+<p><img src="05-making-decisions_files/figure-html5/unnamed-chunk-2-1.png" width="100%" style="display: block; margin: auto;" /></p>
+</div>
+<p>The left panel displays two right skewed distributions. The right panel shows that the median leniency score seems to be higher in the smiling group. There appears to be an outlier in the neutral face expression group, having a leniency score of approximately 8.</p>
+<h2 id="data-summary">Data summary</h2>
+<p>Let’s now compute the number of participants in each group, as well as the mean leniency score and its standard deviation in each group.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>stats</span> <span class='op'>&lt;-</span> <span class='va'>smiles</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>group_by</span><span class='op'>(</span><span class='va'>Group</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>summarise</span><span class='op'>(</span>Count <span class='op'>=</span> <span class='fu'>n</span><span class='op'>(</span><span class='op'>)</span>, 
+            M <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>Leniency</span><span class='op'>)</span>, 
+            SD <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/sd.html'>sd</a></span><span class='op'>(</span><span class='va'>Leniency</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>stats</span>
+</code></pre>
+</div>
+<pre><code># A tibble: 2 x 4
+  Group   Count     M    SD
+  &lt;chr&gt;   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 neutral    34  4.12  1.52
+2 smile      34  4.91  1.68</code></pre>
+</div>
+<p>Let’s make the table a pretty HTML table with the <code>gt</code> package. We further format the numeric columns M and SD to be with 2 decimal places only:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://gt.rstudio.com/'>gt</a></span><span class='op'>)</span>
+
+<span class='fu'><a href='https://gt.rstudio.com/reference/gt.html'>gt</a></span><span class='op'>(</span><span class='va'>stats</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+    <span class='fu'><a href='https://gt.rstudio.com/reference/fmt_number.html'>fmt_number</a></span><span class='op'>(</span>columns <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>M</span>, <span class='va'>SD</span><span class='op'>)</span>, decimals <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
+</code></pre>
+</div>
+<div id="bkyokyiugw" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#bkyokyiugw .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#bkyokyiugw .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#bkyokyiugw .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#bkyokyiugw .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 4px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#bkyokyiugw .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bkyokyiugw .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#bkyokyiugw .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#bkyokyiugw .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#bkyokyiugw .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#bkyokyiugw .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#bkyokyiugw .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#bkyokyiugw .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#bkyokyiugw .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#bkyokyiugw .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#bkyokyiugw .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#bkyokyiugw .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#bkyokyiugw .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#bkyokyiugw .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bkyokyiugw .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#bkyokyiugw .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#bkyokyiugw .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#bkyokyiugw .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#bkyokyiugw .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#bkyokyiugw .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#bkyokyiugw .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#bkyokyiugw .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#bkyokyiugw .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#bkyokyiugw .gt_left {
+  text-align: left;
+}
+
+#bkyokyiugw .gt_center {
+  text-align: center;
+}
+
+#bkyokyiugw .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#bkyokyiugw .gt_font_normal {
+  font-weight: normal;
+}
+
+#bkyokyiugw .gt_font_bold {
+  font-weight: bold;
+}
+
+#bkyokyiugw .gt_font_italic {
+  font-style: italic;
+}
+
+#bkyokyiugw .gt_super {
+  font-size: 65%;
+}
+
+#bkyokyiugw .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 65%;
+}
+</style>
+<table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Group</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Count</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">M</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">SD</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_left">neutral</td>
+<td class="gt_row gt_right">34</td>
+<td class="gt_row gt_right">4.12</td>
+<td class="gt_row gt_right">1.52</td></tr>
+    <tr><td class="gt_row gt_left">smile</td>
+<td class="gt_row gt_right">34</td>
+<td class="gt_row gt_right">4.91</td>
+<td class="gt_row gt_right">1.68</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<p>In the sample, the mean leniency score was higher in the smiling group than the neutral expression group. The difference in mean leniency scores between the smiling and neutral group is 0.79.</p>
+<p>You can get this by looking at the summary stats:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>stats</span>
+</code></pre>
+</div>
+<pre><code># A tibble: 2 x 4
+  Group   Count     M    SD
+  &lt;chr&gt;   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 neutral    34  4.12  1.52
+2 smile      34  4.91  1.68</code></pre>
+</div>
+<p>The vector corresponding to the column M displays the neutral group first, then the smile group second</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>stats</span><span class='op'>$</span><span class='va'>M</span>
+</code></pre>
+</div>
+<pre><code>[1] 4.117647 4.911765</code></pre>
+</div>
+<p>The difference in means between the smiling (2nd group) and neutral group (1st) is:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>diff_M</span> <span class='op'>&lt;-</span> <span class='va'>stats</span><span class='op'>$</span><span class='va'>M</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span> <span class='op'>-</span> <span class='va'>stats</span><span class='op'>$</span><span class='va'>M</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span>
+<span class='va'>diff_M</span>
+</code></pre>
+</div>
+<pre><code>[1] 0.7941176</code></pre>
+</div>
+<h2 id="null-and-alternative-hypothesis">Null and alternative hypothesis</h2>
+<p>The null hypothesis is that facial expression has no effect on the punishment given, i.e. that the population mean leniency score for smiling students is the same as that of neutral students. In other words, there is no difference in population mean leniency score between smiling and neutral students.</p>
+<p>The alternative hypothesis, instead, is the claim of interest to the researchers, i.e. that smiling results in a higher mean leniency score compared to non-smiling students.</p>
+<p>From the above, we can see that the researchers’ hypothesis that smiling students are given more leniency and milder punishments involves two parameters:</p>
+<ul>
+<li><span class="math inline">\(\mu_s\)</span> = the population mean leniency score for the smiling students</li>
+<li><span class="math inline">\(\mu_n\)</span> = the population mean leniency score for students with a neutral expression</li>
+</ul>
+<p>We are now ready to formally write the hypotheses being tested:</p>
+<p><span class="math display">\[
+H_0: \mu_s = \mu_n \\
+H_1: \mu_s &gt; \mu_n
+\]</span></p>
+<p>These can be equivalently written as follows:</p>
+<p><span class="math display">\[
+H_0: \mu_s - \mu_n = 0 \\
+H_1: \mu_s - \mu_n &gt; 0
+\]</span></p>
+<p>Note that the statistical hypotheses is about the population difference in means (<span class="math inline">\(\mu_s - \mu_n\)</span>) and not the sample difference in means, which we know as we have collected data for the sample (difference in means in the sample = 0.79).<br />
+Instead, we do not have data for the entire population, and our interest lies in that difference in means for all those in the populations, so for data we don’t have.<br />
+This is why we need to perform a formal statistical test to check whether a difference of 0.79 (= the pattern) is large enough compared to the variation in the data due to random sampling (= the noise).</p>
+<h2 id="two-sample-t-test">Two-sample t test</h2>
+<p>To compare the means across 2 groups, we will perform a two-sample t-test. The hypotheses involve two groups, “smile” and “neutral”.</p>
+<p>In R this is performed with the <code>t.test()</code> function, but you need to be careful. You need to make the group variable into a factor, and <strong>clearly specify the order of the levels.</strong> The function <code>t.test()</code> will compute the difference between the mean of the first level - the the mean of the second level.</p>
+<p><strong>Factor</strong></p>
+<p>Make the column Group into a factor, the levels should be “smile” and “neutral”, and we want smile before neutral, so that t.test will do the mean of smile - mean of neutral.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>smiles</span><span class='op'>$</span><span class='va'>Group</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>smiles</span><span class='op'>$</span><span class='va'>Group</span>, levels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>'smile'</span>, <span class='st'>'neutral'</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<p><strong>Equal variances?</strong></p>
+<p>Do the two groups have equal variances? Check this with a variance test <code>var.test()</code>:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/stats/var.test.html'>var.test</a></span><span class='op'>(</span><span class='va'>Leniency</span> <span class='op'>~</span> <span class='va'>Group</span>, data <span class='op'>=</span> <span class='va'>smiles</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>
+    F test to compare two variances
+
+data:  Leniency by Group
+F = 1.2183, num df = 33, denom df = 33, p-value = 0.5738
+alternative hypothesis: true ratio of variances is not equal to 1
+95 percent confidence interval:
+ 0.6084463 2.4393924
+sample estimates:
+ratio of variances 
+          1.218294 </code></pre>
+</div>
+<p>Yes, so we will set the <code>var.equal = ...</code> argument of <code>t.test()</code> to TRUE. If the p-value was significant, we would set <code>var.equal = FALSE</code>.</p>
+<p><strong>t-test</strong></p>
+<p>We finally perform the t-test. In this case, our alternative hypothesis was directional, that the leniency was higher for smiling participants than non-smiling ones. The options for the alternative argument in R are alternative = “two.sided”, “less”, or “greater”. In our case we want “greater”:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>smiles_test</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/t.test.html'>t.test</a></span><span class='op'>(</span><span class='va'>Leniency</span> <span class='op'>~</span> <span class='va'>Group</span>, data <span class='op'>=</span> <span class='va'>smiles</span>, var.equal <span class='op'>=</span> <span class='cn'>TRUE</span>,
+                      alternative <span class='op'>=</span> <span class='st'>"greater"</span><span class='op'>)</span>
+<span class='va'>smiles_test</span>
+</code></pre>
+</div>
+<pre><code>
+    Two Sample t-test
+
+data:  Leniency by Group
+t = 2.0415, df = 66, p-value = 0.0226
+alternative hypothesis: true difference in means between group smile and group neutral is greater than 0
+95 percent confidence interval:
+ 0.1451938       Inf
+sample estimates:
+  mean in group smile mean in group neutral 
+             4.911765              4.117647 </code></pre>
+</div>
+<h2 id="understanding-the-output">Understanding the output</h2>
+<p>The function returns the means of the two groups, which we already computed before in our table of summary statistics.</p>
+<pre><code>sample estimates:
+  mean in group smile mean in group neutral 
+             4.911765              4.117647 </code></pre>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>stats</span>
+</code></pre>
+</div>
+<pre><code># A tibble: 2 x 4
+  Group   Count     M    SD
+  &lt;chr&gt;   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 neutral    34  4.12  1.52
+2 smile      34  4.91  1.68</code></pre>
+</div>
+<p>It gives us the t statistics, the degrees of freedom, and the p-value:</p>
+<pre><code>t = 2.0415, df = 66, p-value = 0.0226</code></pre>
+<p>Recall the t-statistic is the ratio of the pattern to noise, i.e.</p>
+<p><span class="math display">\[
+t 
+= \frac{\text{pattern}}{\text{noise}} 
+= \frac{\text{observed} - \text{hypothesised difference}}{\text{standard error}}
+\]</span></p>
+<p>We have the difference in means, computed before and stored into <code>diff_M</code></p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>diff_M</span>
+</code></pre>
+</div>
+<pre><code>[1] 0.7941176</code></pre>
+</div>
+<p>The hypothesised difference in means between the smiling and neutral groups is 0, see the null hypothesis.</p>
+<p>The standard error is obtained from the t test output:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>SE</span> <span class='op'>&lt;-</span> <span class='va'>smiles_test</span><span class='op'>$</span><span class='va'>stderr</span>
+<span class='va'>SE</span>
+</code></pre>
+</div>
+<pre><code>[1] 0.38898</code></pre>
+</div>
+<p>So the t statistic is</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='op'>(</span><span class='va'>diff_M</span> <span class='op'>-</span> <span class='fl'>0</span><span class='op'>)</span> <span class='op'>/</span> <span class='va'>SE</span>
+</code></pre>
+</div>
+<pre><code>[1] 2.041538</code></pre>
+</div>
+<p>Which matches the output of the t.test function!</p>
+<pre><code>t = 2.0415, df = 66, p-value = 0.0226</code></pre>
+<p>The degrees of freedom is the sample size, 68, minus the two population means that we don’t know and need to be estimated: 68 - 2 = 66.</p>
+<p>The p-value tells us the probability of observing a difference in means more extreme than the one we obtained in the sample, 0.79, if the null hypothesis were true. The p-value is smaller than the significance level of 0.05, meaning that we have strong evidence against the null hypothesis.</p>
+<h2 id="reporting-the-results">Reporting the results</h2>
+<p>At the 5% significance level, we performed a two-sample t-test against the null hypothesis that the difference in mean leniency score between smiling and non smiling students is equal to zero, with a one-sided alternative that the difference is greater than zero. The test results, <span class="math inline">\(t(66) = 2.04, p = 0.02\)</span>, one-sided, indicate that if smiling truly had no effect on leniency scores, the chance of getting a difference in mean leniency scores between smiling and neutral students as high as 0.79 is 0.02, or 2 in 100 times. The sample data provide strong evidence against the null hypothesis that smiling had no effect on leniency and in favour of the alternative.</p>
+<p><strong>General rule</strong></p>
+<p>Always report the test results in the context of the study. Link the numbers to the variables under investigation, and provide an interpretation on what the numbers mean in terms of the research question.</p>
+<p>The actual t-test results are reported using t(df) = …, p = …</p>
+<p>You should always report the p-value in full, perhaps rounded for consistency, unless the p-value is tiny. If it has many decimal places, the reader won’t be interested in the 6th or 7th decimal place. Report any p-value smaller than 0.001 as t(df) = …, p &lt; .001.</p>
+<h2 id="validity-conditions-of-the-t-test">Validity conditions of the t-test</h2>
+<p>In order for the results of the two-sample t-test to be valid, we need that:</p>
+<ol type="1">
+<li><p>The data arise from random assignment of subjects to two groups or from two independent random samples from the population</p></li>
+<li><p>Either:<br />
+<br> Each sample should be sufficiently large (<span class="math inline">\(n_1 \geq 30, n_2 \geq 30\)</span> as a guideline)<br />
+<br> Or:<br />
+<br> Both samples came from normal distributions.</p></li>
+<li><p>Should be described by the study design.</p></li>
+<li><p>Is checked as follows</p></li>
+</ol>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>smiles</span> <span class='op'>%&gt;%</span>
+    <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>Group</span> <span class='op'>==</span> <span class='st'>'smile'</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+    <span class='fu'>pull</span><span class='op'>(</span><span class='va'>Leniency</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+    <span class='fu'><a href='https://rdrr.io/r/stats/shapiro.test.html'>shapiro.test</a></span><span class='op'>(</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  .
+W = 0.94069, p-value = 0.06464</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>smiles</span> <span class='op'>%&gt;%</span>
+    <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>Group</span> <span class='op'>==</span> <span class='st'>'neutral'</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+    <span class='fu'>pull</span><span class='op'>(</span><span class='va'>Leniency</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+    <span class='fu'><a href='https://rdrr.io/r/stats/shapiro.test.html'>shapiro.test</a></span><span class='op'>(</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  .
+W = 0.94253, p-value = 0.07335</code></pre>
+</div>
+<p>Both groups appear to be consistent with samples from a normal distribution. The validity conditions are met.</p>
+<p>On top of this, also in this case we have the other alternative condition to be true. Both distributions have enough data, 34 in each group, no strong outliers or skeweness:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>ggplot</span><span class='op'>(</span><span class='va'>smiles</span>, <span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>Group</span>, y <span class='op'>=</span> <span class='va'>Leniency</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+    <span class='fu'>geom_boxplot</span><span class='op'>(</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="05-making-decisions_files/figure-html5/unnamed-chunk-17-1.png" width="80%" style="display: block; margin: auto;" /></p>
+</div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
@@ -2494,6 +3127,15 @@ Checkpoints
 <div class="d-appendix">
 </div>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 
 <!--radix_placeholder_site_after_body-->
 <!--/radix_placeholder_site_after_body-->

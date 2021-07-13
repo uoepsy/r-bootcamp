@@ -128,7 +128,7 @@ If you commit an error, there are two possible outcomes:
 The programming language that you will learn is called R. It also has a very fancy logo:
 
 ```{r, layout="l-body", out.width='20%'}
-knitr::include_graphics('https://cran.r-project.org/Rlogo.svg')
+knitr::include_graphics('images/r-logo.svg')
 ```
 
 
@@ -177,7 +177,7 @@ Click the section that applies to your specific PC to expand it.
 ## RStudio
 
 ```{r, layout="l-body", out.width='40%'}
-knitr::include_graphics('https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/RStudio_logo_flat.svg/2880px-RStudio_logo_flat.svg.png')
+knitr::include_graphics('images/rstudio-logo.svg')
 ```
 
 ### What is RStudio?
