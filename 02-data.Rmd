@@ -316,6 +316,7 @@ unpop
 ```
 
 Create a new column with the population in millions
+
 ```{r}
 unpop %>%
   mutate(world_pop_millions = world_pop / 1000)
